@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
  
-class Intro extends Component {
+class HomeMember extends Component {
  
   render(){
     return (
       <div>
-      This is the intro page! :)
+      This is the home for the team member :)
       </div>
     )
   }
 }
  
-export default Intro;
+export default HomeMember;

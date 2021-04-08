@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
  
-class Intro extends Component {
+class ErrorMessage extends Component {
  
   render(){
     return (
       <div>
-      This is the intro page! :)
+      {this.props.error}
       </div>
     )
   }
 }
  
-export default Intro;
+export default ErrorMessage;

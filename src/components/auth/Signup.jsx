@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import AuthService from './auth-service';
 import {Redirect} from 'react-router-dom';
 import {Link} from 'react-router-dom';
+import ErrorMessage from '../ErrorMessage';
  
 class Signup extends Component {
  
-  state = { username: '', password: '', email: '', firstTime: true, role: 'Team Member', redirect: null }
+  state = { username: '', password: '', email: '', firstTime: true, role: 'Team Member', redirect: null, error: null }
  
   service = new AuthService()
  
@@ -15,22 +16,39 @@ class Signup extends Component {
    
     this.service.signup(username, email, role, firstTime, password)
     .then( response => {
-        this.setState({
-            username: '', 
-            password: '',
-            email: '',
-            firstTime: true,
-            role: 'Team Member',
-            redirect: '/'
-        });
-        this.props.getUser(response)
+        if(response.message) {
+          this.setState({...this.state, error: response.message})
+        } else {
+          this.setState({
+              username: '', 
+              password: '',
+              email: '',
+              firstTime: true,
+              role: 'Team Member',
+              redirect: this.getRolePath(response),
+              error: null
+          });
+          this.props.getUser(response)
+        }
     })
-    .catch( error => console.log(error) )
+    .catch( err => alert(err) )
   }
    
   handleChange = (event) => {  
     const {name, value} = event.target;
     this.setState({[name]: value});
+  }
+
+  getRolePath = (user) => {
+    if(!user) {
+      return null;
+    } else if (user.role === 'Team Leader') {
+      return '/home-leader';
+    } else if (user.role === 'Team Member') {
+      return '/home-member';
+    } else {
+      return '/';
+    }
   }
  
   render(){
@@ -55,6 +73,8 @@ class Signup extends Component {
           
           <input type="submit" value="Signup"/>
         </form>
+
+        {this.state.error && <ErrorMessage error={this.state.error}/>}
    
         <p>Already have account? 
             <Link to={"/login"}>Log in</Link>

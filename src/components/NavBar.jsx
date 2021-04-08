@@ -18,12 +18,24 @@ class NavBar extends Component {
       this.props.getUser(null);
     })
   }
- 
-  render(){
+
+  getRolePath = (user) => {
+    if(!user) {
+      return '/';
+    } else if (user.role === 'Team Leader') {
+      return '/home-leader';
+    } else if (user.role === 'Team Member') {
+      return '/home-member';
+    } else {
+      return '/';
+    }
+  }
+
+  render() {
     return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container-fluid">
-        <Link className="navbar-brand" to='/'>allaboard.</Link>
+        <Link className="navbar-brand" to={this.getRolePath(this.state.loggedInUser)}>allaboard.</Link>
         <ul className="navbar-nav">
             {!this.state.loggedInUser && <li><Link to='/login'>Log in</Link></li>}
             {!this.state.loggedInUser && <li><Link to='/signup'>Sign up</Link></li>}
