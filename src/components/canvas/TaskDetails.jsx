@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import JourneyDetailsService from './journey-details-service';
-import MilestoneService from './milestone-service';
 import TaskService from './task-service';
  
 class TaskDetails extends Component {
@@ -27,10 +25,19 @@ componentDidUpdate(prevProps) {
     }
  
   render() {
-    return <div>
-        {console.log('task', this.state.task)}
-        {this.state.task && <h4>{this.state.task._id}</h4>}
+    const {name, description, type, expectedDuration, milestones} = this.state.task
+    return (
+    <div>
+        <h5>{name}</h5>
+        <p>Type: {type}</p>
+        <p>Description: {description}</p>
+        <p>Expected duration: {expectedDuration}h</p>
+        <h6>Associated milestones:</h6>
+        {milestones && <ul>
+          {milestones.map((milestone) => <li key={milestone._id}>{milestone.name}</li>)}
+          </ul>}
     </div>
+    )
   }
 }
  
