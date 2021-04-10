@@ -8,6 +8,7 @@ import Login from './components/auth/Login';
 import AuthService from './components/auth/auth-service';
 import HomeLeader from './components/home/HomeLeader';
 import HomeMember from './components/home/HomeMember';
+import Canvas from './components/canvas/Canvas';
 
 class App extends Component {
 
@@ -35,6 +36,8 @@ class App extends Component {
     <div className="App">
         <NavBar loggedInUser={this.state.loggedInUser} getUser={this.getTheUser}/> 
         <Switch>
+          <Route exact path='/canvas/:id' render={(props) => <Canvas {...props}/>}/>
+          <Route exact path='/canvas' render={(props) => <Canvas {...props}/>}/>
           <Route exact path='/home-leader' render={() => <HomeLeader/>}/>
           <Route exact path='/home-member' render={() => <HomeMember/>}/>
           <Route exact path="/signup" render={() => <Signup getUser={this.getTheUser}/>}/>
