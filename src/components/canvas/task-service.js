@@ -19,6 +19,16 @@ class TaskService {
     .then(response => response.data)
   }
 
+  editTask = (id, data) => {
+    return this.service.put(`/tasks/${id}`, data)
+    .then(response => response.data)
+  }
+
+  deleteTask = (id) => {
+    return this.service.delete(`/tasks/${id}`)
+    .then(response => response.data)
+  }
+
 }
 
 export default TaskService;
