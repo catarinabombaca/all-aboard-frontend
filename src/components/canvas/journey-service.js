@@ -14,6 +14,22 @@ class JourneyService {
     .then(response => response.data)
   }
 
+  getJourney = (id) => {
+    return this.service.get(`/journeys/${id}`)
+    .then(response => response.data)
+  }
+
+  editJourney = (id, data) => {
+    return this.service.put(`/journeys/${id}`, data)
+    .then(response => response.data)
+  }
+
+  deleteJourney = (id) => {
+    return this.service.delete(`/journeys/${id}`)
+    .then(response => response.data)
+  }
+
+
 }
 
 export default JourneyService;

@@ -24,6 +24,15 @@ class MilestoneService {
     .then(response => response.data)
   }
 
+  editMilestone = (id, data) => {
+    return this.service.put(`/milestones/${id}`, data)
+    .then(response => response.data)
+  }
+
+  deleteMilestone = (id) => {
+    return this.service.delete(`/milestones/${id}`)
+    .then(response => response.data)
+  }
 }
 
 export default MilestoneService;

@@ -9,8 +9,8 @@ class TaskDetails extends Component {
   
 
   getListItem = () => {
-    const id = this.props.match.params
-    this.taskService.getTask(id.id)
+    const {id} = this.props.match.params
+    this.taskService.getTask(id)
     .then(response => this.setState({...this.state, task: response}))
     .catch(err => console.log(err))
     }
@@ -28,7 +28,7 @@ class TaskDetails extends Component {
     console.log(params.id)
     this.taskService.deleteTask(params.id)
     .then(() =>{
-      this.getTasks();
+      this.props.getTasks();
       this.props.history.push('/canvas');       
     })
     .catch((err)=>{console.log(err)})

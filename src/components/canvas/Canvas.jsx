@@ -88,8 +88,8 @@ class Canvas extends Component {
       <h4>{this.state.tab}</h4>
       <List data={this.state.data}/>
       {this.props.match.params.id && this.state.tab === 'Tasks' && <TaskDetails getTasks={this.getTasks} {...this.props}/>}
-      {this.props.match.params.id && this.state.tab === 'Milestones' && <MilestoneDetails id={this.props.match.params.id}/>}
-      {this.props.match.params.id && this.state.tab === 'Journeys' && <JourneyDetails id={this.props.match.params.id}/>}
+      {this.props.match.params.id && this.state.tab === 'Milestones' && <MilestoneDetails getMilestones={this.getMilestones} {...this.props}/>}
+      {this.props.match.params.id && this.state.tab === 'Journeys' && <JourneyDetails getJourneys={this.getJourneys} {...this.props}/>}
       </div>
     )
   }
