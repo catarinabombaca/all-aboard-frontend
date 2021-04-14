@@ -16,8 +16,8 @@ class MilestoneDetails extends Component {
     .catch(err => console.log(err))
     }
   
-    setEditMode = () => {
-      this.setState({...this.state, mode: 'edit'});
+    setEditMode = (component) => {
+      component === 'Milestone' ? this.setState({...this.state, mode: 'editMilestone'}) : this.setState({...this.state, mode: 'editMilestoneTasks'});
     }
   
     setViewMode = () => {
@@ -60,19 +60,22 @@ class MilestoneDetails extends Component {
     return (
     <div>
         {this.state.mode === 'view' && <div>
-        <button onClick={() => this.setEditMode()}>Edit</button>
+        <button onClick={() => this.setEditMode("Milestone")}>Edit</button>
         <button onClick={() => this.deleteItem()}>Delete</button>
         <h5>{name}</h5>
         <p>Description: {description}</p>
         <p>Expected duration: {expectedDuration}h</p>
         {tasks.length !==0 && <div>
           <h6>Associated tasks:</h6>
+          <button onClick={() => this.setEditMode("MilestoneTasks")}>Edit</button>
           <ul>
           {tasks.map((task) => <li key={task._id}>{task.name}</li>)}
           </ul></div>}
           </div>}
-          {this.state.mode === 'edit' && <EditMilestone milestone={this.state.milestone} tasks={this.state.tasks} 
+          {this.state.mode === 'editMilestone' && <EditMilestone milestone={this.state.milestone} tasks={this.state.tasks} 
           setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
+          {this.state.mode === 'editMilestoneTasks' && <EditMilestoneTasks tasks={this.state.tasks} 
+          setViewMode={this.setViewMode} {...this.props}/>}
     </div>
     )
   }
