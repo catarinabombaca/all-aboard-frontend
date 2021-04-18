@@ -19,6 +19,11 @@ class TaskService {
     .then(response => response.data)
   }
 
+  createTask = (data) => {
+    return this.service.post(`/tasks`, data)
+    .then(response => response.data)
+  }
+
   editTask = (id, data) => {
     return this.service.put(`/tasks/${id}`, data)
     .then(response => response.data)

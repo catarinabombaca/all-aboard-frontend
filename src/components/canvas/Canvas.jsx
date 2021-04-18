@@ -7,6 +7,9 @@ import JourneyDetails from './JourneyDetails';
 import JourneyService from './journey-service';
 import MilestoneService from './milestone-service';
 import TaskService from './task-service';
+import CreateTask from './CreateTask';
+import CreateMilestone from './CreateMilestone';
+import CreateJourney from './CreateJourney';
  
 class Canvas extends Component {
 
@@ -85,11 +88,17 @@ class Canvas extends Component {
     return (
       <div>
       <SubNav setTab={this.setTab}/>
+      {this.props.create && this.state.tab === 'Journeys' && <CreateJourney {...this.props} getJourneys={this.getJourneys}/>}
+      {this.props.create && this.state.tab === 'Milestones' && <CreateMilestone {...this.props} getMilestones={this.getMilestones}/>}
+      {this.props.create && this.state.tab === 'Tasks' && <CreateTask {...this.props} getTasks={this.getTasks}/>}
+      {!this.props.create && <div>
+      <button onClick={() => {this.props.history.push('/canvas/create')}}>Create {this.state.tab}</button>
       <h4>{this.state.tab}</h4>
       <List data={this.state.data}/>
       {this.props.match.params.id && this.state.tab === 'Tasks' && <TaskDetails getTasks={this.getTasks} {...this.props}/>}
       {this.props.match.params.id && this.state.tab === 'Milestones' && <MilestoneDetails getMilestones={this.getMilestones} {...this.props}/>}
       {this.props.match.params.id && this.state.tab === 'Journeys' && <JourneyDetails getJourneys={this.getJourneys} {...this.props}/>}
+      </div>}
       </div>
     )
   }

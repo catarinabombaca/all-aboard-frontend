@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
 import JourneyService from './journey-service';
-import JourneyDetailsService from './journey-details-service';
 
-class EditJourneyDetail extends Component {
+class CreateJourney extends Component {
 
-  state = {...this.props.journey};
+  state = {name: '', expectedDuration: 0};
   journeyService = new JourneyService();
-  journeyDetailsService = new JourneyDetailsService();
 
   
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const {params} = this.props.match
 
-    this.journeyService.editJourney(params.id, this.state)
+    this.journeyService.createJourney(this.state)
     .then(() => {
-        this.props.getListItem();
-        this.props.setViewMode();
+      this.props.history.push('/canvas')
+      this.props.getJourneys();
     })
     .catch(err => console.log(err))
   }
@@ -29,14 +26,14 @@ class EditJourneyDetail extends Component {
   render(){
     return (
       <div>
-        <h3>Edit Journey</h3>
+        <h3>Create Journey</h3>
         <form onSubmit={this.handleFormSubmit}>
           <label>Name:</label>
           <input type="text" name="name" value={this.state.name} onChange={e => this.handleChange(e)}/>
           <label>Expected duration:</label>
           <input type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
               
-          <button onClick={() => this.props.setViewMode()}>Cancel</button>
+          <button onClick={() => this.props.history.push('/canvas')}>Cancel</button>
           <input type="submit" value="Submit" />
         </form>
       </div>
@@ -44,4 +41,4 @@ class EditJourneyDetail extends Component {
   }
 }
 
-export default EditJourneyDetail;
+export default CreateJourney;

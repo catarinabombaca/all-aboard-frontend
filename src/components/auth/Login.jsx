@@ -20,7 +20,7 @@ class Login extends Component {
           this.setState({...this.state, error: response.message})
         } else {
           this.setState({email: '', password: '', error: null, redirect: this.getRolePath(response)});
-          this.props.getUser(response)
+          this.props.setUser(response)
         }
     })
     .catch(err => alert(err))

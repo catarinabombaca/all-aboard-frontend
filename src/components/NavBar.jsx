@@ -15,7 +15,7 @@ class NavBar extends Component {
     this.service.logout()
     .then(() => {
       this.setState({loggedInUser: null});
-      this.props.getUser(null);
+      this.props.setUser(null);
     })
   }
 
@@ -39,6 +39,8 @@ class NavBar extends Component {
         <ul className="navbar-nav">
             {!this.state.loggedInUser && <li><Link to='/login'>Log in</Link></li>}
             {!this.state.loggedInUser && <li><Link to='/signup'>Sign up</Link></li>}
+            {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Leader' && <li><Link to='/users'>Members</Link></li>}
+            {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Leader' && <li><Link to='/canvas'>Canvas</Link></li>}
             {this.state.loggedInUser && <li><Link to='/'><button onClick={() => this.logoutUser()}>Log out</button></Link></li>}
             {this.state.loggedInUser && <li>{this.state.loggedInUser.username}</li>}
         </ul>

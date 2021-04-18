@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import TasksService from './task-service';
 import TaskCard from './TaskCard';
- 
+
 class EditMilestoneTasks extends Component {
 
     state = {listTasks: this.props.tasks, allTasks: [], filteredTasks: []}
@@ -9,49 +9,68 @@ class EditMilestoneTasks extends Component {
 
     addTaskToMilestone = (task) => {
       const listTasks = [...this.state.listTasks]
-      const tasksAvailable = [...this.state.tasksAvailable]
       listTasks.push(task)
-      tasksAvailable.splice(tasksAvailable.indexOf(task.id), 1)
-      this.setState({listTasks: listTasks, tasksAvailable: tasksAvailable, filterTasks: tasksAvailable})
+      this.setState({listTasks: listTasks})
     }
 
     removeTaskFromMilestone = (task) => {
       const listTasks = [...this.state.listTasks]
-      const tasksAvailable = [...this.state.tasksAvailable]
-      listTasks.splice(listTasks.indexOf(task.id), 1)
-      tasksAvailable.push(task)
-      console.log(tasksAvailable)
-      this.setState({listTasks: listTasks, tasksAvailable: tasksAvailable, filterTasks: tasksAvailable})
+      listTasks.splice(listTasks.indexOf(task._id), 1)
+      this.setState({listTasks: listTasks})
+    }
+
+    saveTasksChanges = () => {
+      const promises = [];
+      this.state.listTasks.forEach((task) => {
+        promises.push(this.tasksService.editTask(task._id, {milestoneID: this.props.match.params.id}))
+      })
+      Promise.all(promises)
+        .then(() => {
+        this.props.getMilestoneTasks()
+        this.props.setViewMode()
+        })
+        .catch(err => console.log(err))
+    }
+
+    searchQuery = (searchString) => {
+      const pattern = new RegExp(searchString, 'i');
+      const filteredTasks = this.state.allTasks.filter(task => pattern.test(task.name) );
+      if(searchString === '') {
+        this.setState({filteredTasks: [...this.state.allTasks]})
+      } else {
+        this.setState({filteredTasks: filteredTasks})
+      }
+      }
+
+    handleChange = (e) => {
+      const {value} = e.target
+      this.searchQuery(value)
     }
 
     componentDidMount() {
       this.tasksService.tasks()
       .then(tasksFromDB => {
-        
-
         this.setState({allTasks: tasksFromDB, filteredTasks: tasksFromDB})
       })
       .catch(err => console.log(err))
   }
 
   render() {
-    console.log(this.props.tasks)
     return (
         <div>
         <ul>
         {this.state.listTasks.map(task => {
-           return <li key={task._id}>
-               <p>{task.name}</p>
-               <button onClick={() => this.removeTaskFromMilestone(task)}>Remove</button>
-           </li>
+            return <TaskCard key={task._id} task={task} removeBtn={true} removeTaskFromMilestone={this.removeTaskFromMilestone} selectedTasks={this.state.listTasks.map((task) => task._id)}/>
         })}
         </ul>
-        <input type='text'/>
+        <input type='text' name='search' onChange={this.handleChange}/>
         <ul>
         {this.state.filteredTasks.map(task => {
-           return <TaskCard key={task._id} name={task.name} id={task._id} selectedTasks={this.state.listTasks.map((task) => task._id)}/>
+           return <TaskCard key={task._id} task={task} removeBtn={false} addTaskToMilestone={this.addTaskToMilestone} selectedTasks={this.state.listTasks.map((task) => task._id)}/>
         })}
         </ul>
+        <button onClick={() => this.props.setViewMode()}>Cancel</button>
+        <button onClick={() => this.saveTasksChanges()}>Save Changes</button>
         </div>
     )
   }

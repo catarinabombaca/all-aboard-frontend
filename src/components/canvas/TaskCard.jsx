@@ -7,10 +7,12 @@ export default class TaskCard extends Component {
     }
 
     render() {
+        const {_id, name} = this.props.task
         return (
             <li>
-                <p>{this.props.name}</p>
-                {this.showButton(this.props.id, this.props.selectedTasks) && <button>Add task</button>}
+                <p>{name}</p>
+                {this.showButton(_id, this.props.selectedTasks) && !this.props.removeBtn && <button onClick={() => this.props.addTaskToMilestone(this.props.task)}>Add task</button>}
+                {this.props.removeBtn && <button onClick={() => this.props.removeTaskFromMilestone(this.props.task)}>Remove task</button>}
             </li>
         )
     }

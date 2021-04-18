@@ -1,22 +1,19 @@
 import React, { Component } from 'react';
-import JourneyService from './journey-service';
-import JourneyDetailsService from './journey-details-service';
+import MilestoneService from './milestone-service';
 
-class EditJourneyDetail extends Component {
+class CreateMilestone extends Component {
 
-  state = {...this.props.journey};
-  journeyService = new JourneyService();
-  journeyDetailsService = new JourneyDetailsService();
+  state = {name: '', description: '', expectedDuration: 0};
+  milestoneService = new MilestoneService();
 
   
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const {params} = this.props.match
 
-    this.journeyService.editJourney(params.id, this.state)
-    .then(() => {
-        this.props.getListItem();
-        this.props.setViewMode();
+    this.milestoneService.createMilestone(this.state)
+    .then((response) => {
+      this.props.history.push('/canvas')
+      this.props.getMilestones();
     })
     .catch(err => console.log(err))
   }
@@ -29,19 +26,20 @@ class EditJourneyDetail extends Component {
   render(){
     return (
       <div>
-        <h3>Edit Journey</h3>
+        <h3>Create Milestone</h3>
         <form onSubmit={this.handleFormSubmit}>
           <label>Name:</label>
           <input type="text" name="name" value={this.state.name} onChange={e => this.handleChange(e)}/>
+          <label>Description:</label>
+          <textarea name="description" value={this.state.description} onChange={e => this.handleChange(e)}/>
           <label>Expected duration:</label>
           <input type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
-              
-          <button onClick={() => this.props.setViewMode()}>Cancel</button>
-          <input type="submit" value="Submit" />
+          <button onClick={() => this.props.history.push('/canvas')}>Cancel</button>
+          <input type="submit" value="Submit"/>
         </form>
       </div>
     )
   }
 }
 
-export default EditJourneyDetail;
+export default CreateMilestone;

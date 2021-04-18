@@ -24,6 +24,11 @@ class MilestoneService {
     .then(response => response.data)
   }
 
+  createMilestone = (data) => {
+    return this.service.post(`/milestones`, data)
+    .then(response => response.data)
+  }
+
   editMilestone = (id, data) => {
     return this.service.put(`/milestones/${id}`, data)
     .then(response => response.data)

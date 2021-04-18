@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import JourneyService from './journey-service';
 import JourneyDetailsService from './journey-details-service';
 import EditJourneyDetail from './EditJourneyDetail';
+import EditJourneyMilestones from './EditJourneyMilestones';
  
 class JourneyDetails extends Component {
 
@@ -17,20 +18,20 @@ class JourneyDetails extends Component {
     .catch(err => console.log(err))
     }
 
+    setEditMode = (component) => {
+      component === 'Journey' ? this.setState({mode: 'editJourney'}) : this.setState({mode: 'editJourneyMilestones'});
+    }
+  
+    setViewMode = () => {
+      this.setState({mode: 'view'});
+    }
+
     getJourneyDetails = () => {
       const {id} = this.props.match.params
       this.journeyDetailsService.getJourneyDetails(id)
       .then(response => this.setState({journeyDetails: response}))
       .catch(err => console.log(err))
       }
-
-    setEditMode = () => {
-      this.setState({...this.state, mode: 'edit'});
-    }
-  
-    setViewMode = () => {
-      this.setState({...this.state, mode: 'view'});
-    }
 
     deleteItem = () => {
       const { params } = this.props.match;
@@ -55,22 +56,26 @@ class JourneyDetails extends Component {
     }
  
   render() {
-    const {name, description, expectedDuration} = this.state.journey
+    const {name, expectedDuration} = this.state.journey
     const journeyDetails = this.state.journeyDetails
     return (
     <div>
       {this.state.mode === 'view' && <div>
-        <button onClick={() => this.setEditMode()}>Edit</button>
+        <button onClick={() => this.setEditMode('Journey')}>Edit</button>
         <button onClick={() => this.deleteItem()}>Delete</button>
         <h5>{name}</h5>
         <p>Expected duration: {expectedDuration}h</p>
+        <button onClick={() => this.setEditMode('JourneyMilestones')}>Edit</button>
         {journeyDetails.length !==0 && <div>
         <h6>Milestones:</h6>
           <ul>
           {journeyDetails.map((detail) => <li key={detail._id}>{detail.order} - {detail.milestone.name}</li>)}
           </ul></div>}
     </div>}
-    {this.state.mode === 'edit' && <EditJourneyDetail journeyDetails={this.state.journeyDetails} journey={this.state.journey} setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
+    {this.state.mode === 'editJourney' && <EditJourneyDetail journeyDetails={journeyDetails} journey={this.state.journey} 
+          setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
+    {this.state.mode === 'editJourneyMilestones' && <EditJourneyMilestones journeyDetails={journeyDetails} getJourneyDetails={this.getJourneyDetails}
+          setViewMode={this.setViewMode} {...this.props}/>}
     </div>
     )
   }

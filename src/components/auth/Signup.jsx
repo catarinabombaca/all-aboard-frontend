@@ -28,7 +28,7 @@ class Signup extends Component {
               redirect: this.getRolePath(response),
               error: null
           });
-          this.props.getUser(response)
+          this.props.setUser(response)
         }
     })
     .catch( err => alert(err) )

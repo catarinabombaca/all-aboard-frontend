@@ -12,7 +12,7 @@ class MilestoneDetails extends Component {
   getListItem = () => {
     const {id} = this.props.match.params
     this.milestoneService.getMilestone(id)
-    .then(response => this.setState({...this.state, milestone: response}))
+    .then(response => this.setState({milestone: response}))
     .catch(err => console.log(err))
     }
   
@@ -74,7 +74,7 @@ class MilestoneDetails extends Component {
           </div>}
           {this.state.mode === 'editMilestone' && <EditMilestone milestone={this.state.milestone} tasks={this.state.tasks} 
           setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
-          {this.state.mode === 'editMilestoneTasks' && <EditMilestoneTasks tasks={this.state.tasks} 
+          {this.state.mode === 'editMilestoneTasks' && <EditMilestoneTasks tasks={this.state.tasks} getMilestoneTasks={this.getMilestoneTasks}
           setViewMode={this.setViewMode} {...this.props}/>}
     </div>
     )

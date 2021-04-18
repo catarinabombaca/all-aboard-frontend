@@ -14,6 +14,15 @@ class JourneyDetailsService {
     .then(response => response.data)
   }
 
+  deleteJourneyDetail = (journeyID, detailsID) => {
+    return this.service.delete(`/journeys/${journeyID}/details/${detailsID}`)
+    .then(response => response.data)
+  }
+
+  createJourneyDetails = (id, journeyDetails) => {
+    return this.service.post(`/journeys/${id}/details`, journeyDetails)
+    .then(response => response.data)
+  }
 }
 
 export default JourneyDetailsService;

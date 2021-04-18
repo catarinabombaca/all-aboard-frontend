@@ -19,6 +19,11 @@ class JourneyService {
     .then(response => response.data)
   }
 
+  createJourney = (data) => {
+    return this.service.post(`/journeys`, data)
+    .then(response => response.data)
+  }
+
   editJourney = (id, data) => {
     return this.service.put(`/journeys/${id}`, data)
     .then(response => response.data)
