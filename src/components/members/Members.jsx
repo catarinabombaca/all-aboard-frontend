@@ -69,7 +69,7 @@ class Members extends Component {
         <input type='checkbox' name='myTeam' onChange={this.handleChange}/>
         <label htmlFor='myTeam'>Only show my team members</label>
         <MembersList members={this.state.filteredMembers} addMemberToTeam={this.addMemberToTeam} {...this.props}/>
-        {this.props.match.params.id && <MemberDetails {...this.props}/>}
+        {this.props.match.params.id && <MemberDetails getMembers={this.getMembers} {...this.props}/>}
       </div>
     )
   }

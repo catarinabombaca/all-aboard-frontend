@@ -6,6 +6,9 @@ import JourneyProgressService from './journey-p-service';
 import JourneyDetailService from '../canvas/journey-details-service';
 import MilestoneProgressService from './milestone-p-service';
 import JourneyDetailsProgressService from './journey-p-details-service';
+import TaskService from '../canvas/task-service';
+import MilestoneService from '../canvas/milestone-service';
+import TaskProgressService from './task-p-service';
  
 class MemberDetails extends Component {
 
@@ -16,6 +19,9 @@ class MemberDetails extends Component {
     journeyDetailService = new JourneyDetailService();
     milestoneProgressService = new MilestoneProgressService();
     journeyDetailsProgressService = new JourneyDetailsProgressService();
+    taskService = new TaskService();
+    milestoneService = new MilestoneService();
+    taskProgressService = new TaskProgressService();
 
     getJourneys = () => {
       this.journeyService.journeys()
@@ -33,29 +39,68 @@ class MemberDetails extends Component {
     handleFormSubmit = (event) => {
       event.preventDefault();
       const {member, assignedJourneyId} = this.state
-      const journeyToAssign = this.state.journeys.filter(journey => journey._id === assignedJourneyId)
+      const journeyToAssign = this.state.journeys.filter(journey => journey._id === assignedJourneyId)[0]
       const promisesCreateMilestone = [];
+      const promisesGetMilestoneTasks = [];
+      const promisesCreateTask = [];
       const promisesCreateJourneyDetail = [];
 
       this.journeyDetailService.getJourneyDetails(assignedJourneyId)
-      .then(journeyDetails => {
-        journeyDetails.forEach(journeyDetail => {
-          promisesCreateMilestone.push(this.milestoneProgressService.createMilestoneProgress(journeyDetail.milestone))
-          //this.getTasks().then()
+      .then((journeyDetails) => {
+           journeyDetails.forEach(journeyDetail => {
+          let milestone = {...journeyDetail.milestone}
+          milestone.milestone = journeyDetail.milestone._id
+          delete milestone._id
+          promisesCreateMilestone.push(this.milestoneProgressService.createMilestoneProgress(milestone))
         })
-        Promise.all(promisesCreateMilestone)
-        .then()
-      })
-      .then((results) => console.log(results))
 
-      // this.journeyProgressService.createJourneyProgress({
-      //   user: member._id,
-      //   name: journeyToAssign.name,
-      //   expectedDuration: journeyToAssign.expectedDuration,
-      //   start: Date.now()
-      // })
-      // .then()
-  
+        Promise.all(promisesCreateMilestone)
+        .then(milestonesProgress => {
+          milestonesProgress.forEach((milestoneProgress => {
+            promisesGetMilestoneTasks.push(this.milestoneService.getMilestoneTasks(milestoneProgress.milestone))
+          }))
+
+          Promise.all(promisesGetMilestoneTasks)
+          .then(allTasks => {
+
+            allTasks.forEach((milestoneTasks, index) => {
+              milestoneTasks.forEach(task => {
+                let newTask = {...task}
+                newTask.milestoneProgress = milestonesProgress[index]._id
+                delete newTask._id
+                promisesCreateTask.push(this.taskProgressService.createTaskProgress(newTask))
+              })
+            })
+
+            Promise.all(promisesCreateTask)
+            .then(() => {
+              return this.journeyProgressService.createJourneyProgress({
+                user: member._id,
+                name: journeyToAssign.name,
+                expectedDuration: journeyToAssign.expectedDuration,
+                start: Date.now()
+              })
+            })
+            .then(journeyProgress => {
+              journeyDetails.forEach((journeyDetail, index) => {
+                let newJourneyDetail = {...journeyDetail}
+                newJourneyDetail.milestoneProgress = milestonesProgress[index]._id
+                delete newJourneyDetail._id
+                promisesCreateJourneyDetail
+                .push(this.journeyDetailsProgressService.createJourneyDetailsProgress(
+                  journeyProgress._id, newJourneyDetail))
+              })
+
+              Promise.all(promisesCreateJourneyDetail)
+              .then(() => {
+                this.userService.editUser(member._id, {journeyProgress: journeyProgress._id})
+                .then(() => {this.getUser()})
+                .catch(err => console.log(err))
+              })
+            })
+          })
+        })
+      })
     }
   
     handleChange = (event) => {  

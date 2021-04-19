@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class MemberCard extends Component {
 
 render() {
-    const {_id, username, imageUrl, role, teamLeader, journeyProgress} = this.props.member
+    const {_id, username, imageUrl, role, teamLeader} = this.props.member
     return (
         <li>
             <img alt={username} src={imageUrl}/>
