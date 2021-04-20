@@ -41,6 +41,7 @@ class NavBar extends Component {
             {!this.state.loggedInUser && <li><Link to='/signup'>Sign up</Link></li>}
             {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Leader' && <li><Link to='/users'>Members</Link></li>}
             {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Leader' && <li><Link to='/canvas'>Canvas</Link></li>}
+            {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Member' && <li><Link to='/my-tasks'>My Tasks</Link></li>}
             {this.state.loggedInUser && <li><Link to='/'><button onClick={() => this.logoutUser()}>Log out</button></Link></li>}
             {this.state.loggedInUser && <li>{this.state.loggedInUser.username}</li>}
         </ul>

@@ -10,6 +10,7 @@ import HomeLeader from './components/home/HomeLeader';
 import HomeMember from './components/home/HomeMember';
 import Canvas from './components/canvas/Canvas';
 import Members from './components/members/Members';
+import MyTasks from './components/my-tasks/MyTasks';
 
 class App extends Component {
 
@@ -43,6 +44,8 @@ class App extends Component {
           <Route exact path='/users/:id' render={(props) => <Members {...props} loggedInUser={this.state.loggedInUser}/>}/>
           <Route exact path='/users' render={(props) => <Members {...props} loggedInUser={this.state.loggedInUser}/>}/>
           <Route exact path='/home-leader' render={() => <HomeLeader/>}/>
+          <Route exact path='/my-tasks/:id' render={(props) => <MyTasks {...props} loggedInUser={this.state.loggedInUser}/>}/>
+          <Route exact path='/my-tasks' render={(props) => <MyTasks {...props} loggedInUser={this.state.loggedInUser}/>}/>
           <Route exact path='/home-member' render={() => <HomeMember/>}/>
           <Route exact path="/signup" render={() => <Signup setUser={this.setTheUser}/>}/>
           <Route exact path='/login' render={() => <Login setUser={this.setTheUser}/>}/>
