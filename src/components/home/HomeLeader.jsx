@@ -4,7 +4,7 @@ class HomeLeader extends Component {
  
   render(){
     return (
-      <div>
+      <div className='container'>
       This is the home for the Team Leader :)
       </div>
     )

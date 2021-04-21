@@ -59,7 +59,7 @@ class JourneyDetails extends Component {
     const {name, expectedDuration} = this.state.journey
     const journeyDetails = this.state.journeyDetails
     return (
-    <div>
+    <div className="col-sm-8">
       {this.state.mode === 'view' && <div>
         <button onClick={() => this.setEditMode('Journey')}>Edit</button>
         <button onClick={() => this.deleteItem()}>Delete</button>

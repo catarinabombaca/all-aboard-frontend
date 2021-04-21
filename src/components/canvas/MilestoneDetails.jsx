@@ -58,7 +58,7 @@ class MilestoneDetails extends Component {
     const {name, description, expectedDuration} = this.state.milestone
     const tasks = this.state.tasks
     return (
-    <div>
+    <div className="col-sm-8">
         {this.state.mode === 'view' && <div>
         <button onClick={() => this.setEditMode("Milestone")}>Edit</button>
         <button onClick={() => this.deleteItem()}>Delete</button>

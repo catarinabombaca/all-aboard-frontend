@@ -53,32 +53,50 @@ class Signup extends Component {
  
   render(){
     return(
-        <div>
+        <div className='container-fluid d-flex h-100 flex-column text-white'>
         {this.state.redirect && <Redirect to={this.state.redirect}/>}
-        <form onSubmit={this.handleFormSubmit}>
-          <label>Username:</label>
-          <input type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
+        <div className='row'>
+          <div className='col-sm d-flex flex-column justify-content-evenly align-items-center'>
+            <form className='w-75 m-5' onSubmit={this.handleFormSubmit}>
+              <div className='mb-3 mx-lg-5 px-lg-5'>
+                <label className="form-label">Username:</label>
+                <input className="form-control" type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
+              </div>
 
-          <label>Email:</label>
-          <input type="email" name="email" value={this.state.email} onChange={ e => this.handleChange(e)}/>
-          
-          <label>Password:</label>
-          <input type='password' name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
+              <div className='mb-3 mx-lg-5 px-lg-5'>
+              <label className="form-label">Email:</label>
+              <input className="form-control" type="email" name="email" value={this.state.email} onChange={ e => this.handleChange(e)}/>
+              </div>
 
-          <label>Role:</label>
-            <select name="role" value={this.state.role} onChange={ e => this.handleChange(e)}>
+              <div className='mb-3 mx-lg-5 px-lg-5'>
+              <label className="form-label">Password:</label>
+              <input className="form-control" type='password' name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
+              </div>
+
+              <div className='mb-3 mx-lg-5 px-lg-5'>
+              <label className="form-label">Role:</label>
+              <select className="form-select" name="role" value={this.state.role} onChange={ e => this.handleChange(e)}>
                 <option value="Team Member">Team Member</option>
                 <option value="Team Leader">Team Leader</option>
-            </select>
+              </select>
+              </div>
           
-          <input type="submit" value="Signup"/>
-        </form>
+              <input className='btn-red btn btn-primary btn-lg rounded-pill align-self-lg-start mx-5 my-3 px-5' type="submit" value="Sign up"/>
+            </form>
+          </div>
+        </div>
 
-        {this.state.error && <ErrorMessage error={this.state.error}/>}
-   
-        <p>Already have account? 
-            <Link to={"/login"}>Log in</Link>
-        </p>
+        {this.state.error && <div className='row'>
+          <div className='col-sm d-flex flex-column justify-content-start align-items-center'>
+            <ErrorMessage error={this.state.error}/>
+            </div>
+          </div>}
+          <div className='row'>
+            <p className='col-sm d-flex flex-column justify-content-start align-items-center'>
+              Already have account? 
+              <Link className='text-white' to={"/login"}>Log in</Link>
+            </p>
+          </div>
         </div>
     )
   }

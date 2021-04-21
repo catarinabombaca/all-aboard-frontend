@@ -33,18 +33,38 @@ class NavBar extends Component {
 
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="Main-nav navbar navbar-expand-lg navbar-dark">
         <div className="container-fluid">
-        <Link className="navbar-brand" to={this.getRolePath(this.state.loggedInUser)}>allaboard.</Link>
-        <ul className="navbar-nav">
-            {!this.state.loggedInUser && <li><Link to='/login'>Log in</Link></li>}
-            {!this.state.loggedInUser && <li><Link to='/signup'>Sign up</Link></li>}
-            {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Leader' && <li><Link to='/users'>Members</Link></li>}
-            {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Leader' && <li><Link to='/canvas'>Canvas</Link></li>}
-            {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Member' && <li><Link to='/my-tasks'>My Tasks</Link></li>}
-            {this.state.loggedInUser && <li><Link to='/'><button onClick={() => this.logoutUser()}>Log out</button></Link></li>}
-            {this.state.loggedInUser && <li>{this.state.loggedInUser.username}</li>}
-        </ul>
+        <Link className="navbar-brand mb-0 fs-2 fw-bold" to={this.getRolePath(this.state.loggedInUser)}>all aboard.</Link>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        {!this.state.loggedInUser && <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
+            <li className='nav-item navbar-text'><Link className='nav-link' aria-current="page" to='/login'>Log in</Link></li>
+            <li className='nav-item'><Link className='btn btn-outline-light btn-lg rounded-pill m-2 px-4' to='/signup'>Sign up</Link></li>
+          </ul>
+        </div>}
+
+          {this.state.loggedInUser && <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+            {this.state.loggedInUser.role === 'Team Leader' && <li className='nav-item navbar-text'><Link className='nav-link' to='/users'>Members</Link></li>}
+            {this.state.loggedInUser.role === 'Team Leader' && <li className='nav-item navbar-text'><Link className='nav-link' to='/canvas'>Canvas</Link></li>}
+            {this.state.loggedInUser.role === 'Team Member' && <li className='nav-item navbar-text'><Link className='nav-link' to='/my-tasks'>My Tasks</Link></li>}
+          </ul>
+          </div>}
+
+          {this.state.loggedInUser && <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+            <li className='nav-item'><Link to='/'><button className='btn-link btn-lg m-2 px-4' onClick={() => this.logoutUser()}>Log out</button></Link></li>
+            <li className='nav-item navbar-text text-white'>
+              <Link className='nav-link'>
+                {this.state.loggedInUser.username}
+                <img className="nav-user-img rounded-circle ms-3" alt={this.state.loggedInUser.username} src={this.state.loggedInUser.imageUrl}/>
+              </Link>
+            </li>
+          </ul>
+          </div>}
         </div>
       </nav>
     )

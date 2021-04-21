@@ -4,7 +4,7 @@ class ErrorMessage extends Component {
  
   render(){
     return (
-      <div>
+      <div class="alert alert-danger" role="alert">
       {this.props.error}
       </div>
     )

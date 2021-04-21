@@ -35,8 +35,11 @@ class App extends Component {
   render() {
     this.fetchUser()
     return (
-    <div className="App">
+    <div className="App container-fluid d-flex h-100 flex-column">
+      <div className='row'>
         <NavBar loggedInUser={this.state.loggedInUser} setUser={this.setTheUser}/> 
+      </div>
+      <div className='row flex-grow-1'>
         <Switch> 
           <Route exact path='/canvas/create' render={(props) => <Canvas {...props} create={true}/>}/>  
           <Route exact path='/canvas/:id' render={(props) => <Canvas {...props}/>}/>
@@ -51,6 +54,7 @@ class App extends Component {
           <Route exact path='/login' render={() => <Login setUser={this.setTheUser}/>}/>
           <Route exact path='/' component={Intro}/>
         </Switch>
+      </div>
     </div>
     )
   };

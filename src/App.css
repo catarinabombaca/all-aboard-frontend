@@ -1,38 +1,134 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(0.25turn, #457B9D, #1D3557);
 }
 
-.App-link {
-  color: #61dafb;
+.Main-nav {
+  background: linear-gradient(0.25turn, #457B9D, #1D3557);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-red { 
+  color: #ffffff; 
+  background-color: #E63946; 
+  border-color: #E63946; 
+} 
+ 
+.btn-red:hover, 
+.btn-red:focus, 
+.btn-red:active, 
+.btn-red.active, 
+.open .dropdown-toggle.btn-red { 
+  color: #ffffff; 
+  background-color: #E63946; 
+  border-color: #E63946; 
+} 
+ 
+.btn-red:active, 
+.btn-red.active, 
+.open .dropdown-toggle.btn-red { 
+  background-image: none; 
+} 
+ 
+.btn-red.disabled, 
+.btn-red[disabled], 
+fieldset[disabled] .btn-red, 
+.btn-red.disabled:hover, 
+.btn-red[disabled]:hover, 
+fieldset[disabled] .btn-red:hover, 
+.btn-red.disabled:focus, 
+.btn-red[disabled]:focus, 
+fieldset[disabled] .btn-red:focus, 
+.btn-red.disabled:active, 
+.btn-red[disabled]:active, 
+fieldset[disabled] .btn-red:active, 
+.btn-red.disabled.active, 
+.btn-red[disabled].active, 
+fieldset[disabled] .btn-red.active { 
+  background-color: #E63946; 
+  border-color: #E63946; 
+} 
+ 
+.btn-red .badge { 
+  color: #E63946; 
+  background-color: #ffffff; 
 }
+
+.btn-link { 
+  color: #ffffff; 
+  background-color: transparent; 
+  border-color: transparent; 
+} 
+ 
+.btn-link:hover, 
+.btn-link:focus, 
+.btn-link:active, 
+.btn-link.active, 
+.open .dropdown-toggle.btn-link { 
+  color: #ffffff; 
+  background-color: transparent; 
+  border-color: transparent; 
+} 
+ 
+.btn-link:active, 
+.btn-link.active, 
+.open .dropdown-toggle.btn-link { 
+  background-image: none; 
+} 
+ 
+.btn-link.disabled, 
+.btn-link[disabled], 
+fieldset[disabled] .btn-link, 
+.btn-link.disabled:hover, 
+.btn-link[disabled]:hover, 
+fieldset[disabled] .btn-link:hover, 
+.btn-link.disabled:focus, 
+.btn-link[disabled]:focus, 
+fieldset[disabled] .btn-link:focus, 
+.btn-link.disabled:active, 
+.btn-link[disabled]:active, 
+fieldset[disabled] .btn-link:active, 
+.btn-link.disabled.active, 
+.btn-link[disabled].active, 
+fieldset[disabled] .btn-link.active { 
+  background-color: transparent; 
+  border-color: transparent; 
+} 
+ 
+.btn-link .badge { 
+  color: #611BBD; 
+  background-color: transparent; 
+}
+
+.Big-top-margin {
+  margin-top: 25%
+}
+
+.intro-img {
+  width: 70%;
+  height: 90%
+}
+
+.wait-img {
+  width: 300px;
+  height: 300px
+}
+
+.nav-user-img {
+  width: 40px;
+  height: 40px
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #E63946;
+}
+
+.bg-shape {
+  background-color: #1D3557;
+  border-radius: 12px;
+}
+
+

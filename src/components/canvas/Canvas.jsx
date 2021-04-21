@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import waiting from './waiting-img.svg'
 import SubNav from './Subnav';
 import List from './List';
 import TaskDetails from './TaskDetails';
@@ -86,18 +87,32 @@ class Canvas extends Component {
 
   render() {
     return (
-      <div>
-      <SubNav setTab={this.setTab}/>
+      <div className='d-flex flex-column'>
+      <SubNav setTab={this.setTab} tab={this.state.tab}/>
       {this.props.create && this.state.tab === 'Journeys' && <CreateJourney {...this.props} getJourneys={this.getJourneys}/>}
       {this.props.create && this.state.tab === 'Milestones' && <CreateMilestone {...this.props} getMilestones={this.getMilestones}/>}
       {this.props.create && this.state.tab === 'Tasks' && <CreateTask {...this.props} getTasks={this.getTasks}/>}
-      {!this.props.create && <div>
-      <button onClick={() => {this.props.history.push('/canvas/create')}}>Create {this.state.tab}</button>
-      <h4>{this.state.tab}</h4>
-      <List data={this.state.data}/>
-      {this.props.match.params.id && this.state.tab === 'Tasks' && <TaskDetails getTasks={this.getTasks} {...this.props}/>}
-      {this.props.match.params.id && this.state.tab === 'Milestones' && <MilestoneDetails getMilestones={this.getMilestones} {...this.props}/>}
-      {this.props.match.params.id && this.state.tab === 'Journeys' && <JourneyDetails getJourneys={this.getJourneys} {...this.props}/>}
+
+
+      {!this.props.create && <div className='bg-shape  m-3 flex-grow-1 d-flex flex-column'>
+          <div className='d-flex flex-row mx-5 my-4 justify-content-between align-items-center'>
+            <h4>{this.state.tab}</h4>
+            <button className='btn btn-outline-light btn-lg rounded-pill m-2 px-4' onClick={() => {this.props.history.push('/canvas/create')}}>Create {this.state.tab}</button>
+          </div>
+          <div className='container flex-grow-1'>
+              <div className='row h-100 align-items-start justify-content-evenly'>
+                  <div className="col-sm-4">
+                  <List data={this.state.data} {...this.props}/>
+                  </div>
+                {!this.props.match.params.id && <div className="col-sm-8">
+                    <h4>No item selected</h4>
+                    <img className='wait-img' alt='waiting' src={waiting}/>
+                </div>}
+                {this.props.match.params.id && this.state.tab === 'Tasks' && <TaskDetails getTasks={this.getTasks} {...this.props}/>}
+                {this.props.match.params.id && this.state.tab === 'Milestones' && <MilestoneDetails getMilestones={this.getMilestones} {...this.props}/>}
+                {this.props.match.params.id && this.state.tab === 'Journeys' && <JourneyDetails getJourneys={this.getJourneys} {...this.props}/>}
+               </div>
+            </div>
       </div>}
       </div>
     )

@@ -45,25 +45,38 @@ class Login extends Component {
  
   render() {
     return(
-        <div>
+        <div className='container-fluid d-flex h-100 flex-column text-white'>
         {this.state.redirect && <Redirect to={this.state.redirect}/>}
-        <form onSubmit={this.handleFormSubmit}>
+        <div className='row'>
+          <div className='col-sm d-flex flex-column justify-content-evenly align-items-center'>
+            <form className='w-75 m-5' onSubmit={this.handleFormSubmit}>
+              <div className='mb-3 mx-lg-5 px-lg-5'>
+                <label className="form-label">Email:</label>
+                <input className="form-control" type="email" name="email" value={this.state.email} onChange={ e => this.handleChange(e)}/>
+              </div>
 
-          <label>Email:</label>
-          <input type="email" name="email" value={this.state.email} onChange={ e => this.handleChange(e)}/>
+              <div className='mb-3 mx-lg-5 px-lg-5'>
+                <label className="form-label">Password:</label>
+                <input className="form-control" type='password' name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
+              </div>
           
-          <label>Password:</label>
-          <input type='password' name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
-          
-          <input type="submit" value="Login" />
-        </form>
+              <input className='btn-red btn btn-primary btn-lg rounded-pill align-self-lg-start mx-5 my-3 px-5' type="submit" value="Login" />
+            </form>
+          </div>
+        </div>
 
-        {this.state.error && <ErrorMessage error={this.state.error}/>}
-   
-        <p>Don't have account? 
-            <Link to={"/signup"}>Sign up</Link>
+        {this.state.error && <div className='row'>
+          <div className='col-sm d-flex flex-column justify-content-start align-items-center'>
+            <ErrorMessage error={this.state.error}/>
+          </div>
+        </div>}
+        <div className='row'>
+          <p className='col-sm d-flex flex-column justify-content-start align-items-center'>
+            Don't have account? 
+          <Link className='text-white' to={"/signup"}>Sign up</Link>
         </p>
         </div>
+      </div>
     )
   }
 }

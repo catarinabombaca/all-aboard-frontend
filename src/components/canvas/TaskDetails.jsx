@@ -48,7 +48,7 @@ class TaskDetails extends Component {
     console.log(this.props)
     const {name, description, type, expectedDuration, milestones} = this.state.task
     return (
-    <div>
+    <div className="col-sm-8">
         {this.state.mode === 'view' && <div>
         <button onClick={() => this.setEditMode()}>Edit</button>
         <button onClick={() => this.deleteItem()}>Delete</button>
