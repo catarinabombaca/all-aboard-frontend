@@ -14,7 +14,7 @@ class UserProfile extends Component {
               <p>{loggedInUser.email}</p>
               <p>{loggedInUser.role}</p>  
           </div>}
-          {loggedInUser && <EditProfile user={loggedInUser} setUser={this.props.setUser}/>}
+          {loggedInUser && <EditProfile user={loggedInUser} setTheUser={this.props.setTheUser}/>}
         </div>
       </div>
     )

@@ -55,6 +55,14 @@ class EditMilestoneTasks extends Component {
       .catch(err => console.log(err))
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.match.params.id !== this.props.match.params.id) {
+        this.props.getListItem();
+        this.props.getMilestoneTasks();
+        this.props.setViewMode();
+        }
+    }
+
   render() {
     return (
         <div className='rounded-3 bg-blue'>

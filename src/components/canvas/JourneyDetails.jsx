@@ -84,9 +84,9 @@ class JourneyDetails extends Component {
       </div>}
 
     {this.state.mode === 'editJourney' && <EditJourneyDetail journeyDetails={journeyDetails} journey={this.state.journey} 
-          setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
+          setViewMode={this.setViewMode} getListItem={this.getListItem} getJourneyDetails={this.getJourneyDetails} {...this.props}/>}
     {this.state.mode === 'editJourneyMilestones' && <EditJourneyMilestones journeyDetails={journeyDetails} getJourneyDetails={this.getJourneyDetails}
-          setViewMode={this.setViewMode} {...this.props}/>}
+          setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
     </div>
     )
   }

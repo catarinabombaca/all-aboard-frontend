@@ -25,7 +25,7 @@ class SubmitTask extends Component {
     return (
       <div>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Insert here the link to the final deliverable:</label>
+          <label>Insert here the link to the final deliverable</label>
           <input type="text" name="submitURL" value={this.state.submitURL} onChange={e => this.handleChange(e)}/>
         
           <input type="submit" value="Submit" />

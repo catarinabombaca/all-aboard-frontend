@@ -24,6 +24,14 @@ class EditMilestone extends Component {
     this.setState({[name]: value});
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.match.params.id !== this.props.match.params.id) {
+        this.props.getListItem();
+        this.props.getMilestoneTasks();
+        this.props.setViewMode();
+        }
+    }
+
   render(){
     return (
       <div className='rounded-3 bg-blue'>
@@ -35,17 +43,17 @@ class EditMilestone extends Component {
           </div>
 
           <div className='my-3 mx-5 px-lg-5'>
-            <label className="form-label">Name:</label>
+            <label className="form-label">Name</label>
             <input className="form-control" type="text" name="name" value={this.state.name} onChange={e => this.handleChange(e)}/>
           </div>
 
           <div className='my-3 mx-5 px-lg-5'>
-            <label className="form-label">Description:</label>
+            <label className="form-label">Description</label>
             <textarea className="form-control"name="description" value={this.state.description} onChange={e => this.handleChange(e)}/>
           </div>
 
           <div className='my-3 mx-5 px-lg-5 pb-4'>
-            <label className="form-label">Expected duration:</label>
+            <label className="form-label">Expected duration</label>
             <input className="form-control" type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
           </div>
         </form>

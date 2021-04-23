@@ -28,25 +28,25 @@ class CreateTask extends Component {
       <div>
         <h3>Create Task</h3>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Name:</label>
+          <label>Name</label>
           <input type="text" name="name" value={this.state.name} onChange={e => this.handleChange(e)}/>
-          <label>Description:</label>
+          <label>Description</label>
           <textarea name="description" value={this.state.description} onChange={e => this.handleChange(e)}/>
-          <label>Type:</label>
+          <label>Type</label>
             <select name="type" value={this.state.type} onChange={ e => this.handleChange(e)}>
                 <option value="General">General</option>
                 <option value="Course">Course</option>
                 <option value="Ramp Up">Ramp Up</option>
             </select>
           {this.state.type !== 'Course' && <div>
-              <label>Link to complementary documentation:</label>
+              <label>Link to complementary documentation</label>
               <input type="text" name="docURL" value={this.state.docURL} onChange={e => this.handleChange(e)}/>
               </div>}
           {this.state.type === 'Course' && <div>
-              <label>Link to course:</label>
+              <label>Link to Course</label>
               <input type="text" name="course" value={this.state.course} onChange={e => this.handleChange(e)}/>
               </div>}
-          <label>Expected duration:</label>
+          <label>Expected Duration</label>
           <input type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
               
           <button onClick={() => this.props.history.push('/canvas')}>Cancel</button>

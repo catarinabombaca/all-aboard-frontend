@@ -24,6 +24,13 @@ class EditTask extends Component {
     this.setState({[name]: value});
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.match.params.id !== this.props.match.params.id) {
+        this.props.getListItem();
+        this.props.setViewMode()
+        }
+    }
+
   render(){
     return (
       <div className='rounded-3 bg-blue'>
@@ -35,15 +42,15 @@ class EditTask extends Component {
           </div>
 
           <div className='my-3 mx-5 px-lg-5'>
-            <label className="form-label">Name:</label>
+            <label className="form-label">Name</label>
             <input className="form-control" type="text" name="name" value={this.state.name} onChange={e => this.handleChange(e)}/>
           </div>
           <div className='my-3 mx-5 px-lg-5'>
-            <label className="form-label">Description:</label>
+            <label className="form-label">Description</label>
             <textarea className="form-control" name="description" value={this.state.description} onChange={e => this.handleChange(e)}/>
           </div>
           <div className='my-3 mx-5 px-lg-5'>
-          <label className="form-label">Type:</label>
+          <label className="form-label">Type</label>
             <select className="form-control" name="type" value={this.state.type} onChange={ e => this.handleChange(e)}>
                 <option value="General">General</option>
                 <option value="Course">Course</option>
@@ -51,15 +58,15 @@ class EditTask extends Component {
             </select>
           </div>
           {this.state.type !== 'Course' && <div className='my-3 mx-5 px-lg-5'>
-              <label className="form-label">Link to complementary documentation:</label>
+              <label className="form-label">Link to complementary documentation</label>
               <input className="form-control" type="text" name="docURL" value={this.state.docURL} onChange={e => this.handleChange(e)}/>
               </div>}
           {this.state.type === 'Course' && <div className='my-3 mx-5 px-lg-5'>
-              <label className="form-label">Link to course:</label>
+              <label className="form-label">Link to Course</label>
               <input className="form-control" type="text" name="course" value={this.state.course} onChange={e => this.handleChange(e)}/>
               </div>}
           <div className='my-4 mx-5 px-lg-5 pb-4'>
-            <label className="form-label">Expected duration:</label>
+            <label className="form-label">Expected Duration</label>
             <input className="form-control" type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
           </div>
         </form>

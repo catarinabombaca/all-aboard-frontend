@@ -30,7 +30,8 @@ class EditProfile extends Component {
         this.userService.editUser(this.props.user._id, this.state)
         .then(response => {
             console.log('handlesubmit', response)
-            this.props.setUser(response)
+            console.log('thisprops',this.props)
+            this.props.setTheUser(response)
         })
         .catch(err => console.log(err))
      
@@ -42,12 +43,12 @@ class EditProfile extends Component {
       <div className='col-sm d-flex flex-column justify-content-evenly align-items-center'>
       <form className='w-75 m-5' onSubmit={this.handleSubmit}>
               <div className='mb-3 mx-lg-5 px-lg-5'>
-                <label className="form-label">Username:</label>
+                <label className="form-label">Username</label>
                 <input className="form-control" type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
               </div>
 
               <div className='mb-3 mx-lg-5 px-lg-5'>
-                <label className="form-label">Profile Photo:</label>
+                <label className="form-label">Profile Photo</label>
                 <input className="form-control" type="file" name="imageUrl" onChange={ e => this.handleFileUpload(e)}/>
               </div>
           

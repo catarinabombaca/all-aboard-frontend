@@ -26,6 +26,14 @@ class EditJourneyDetail extends Component {
     this.setState({[name]: value});
   }
 
+  componentDidUpdate(prevProps) {
+    console.log(prevProps.match.params.id !== this.props.match.params.id)
+    if(prevProps.match.params.id !== this.props.match.params.id) {
+      this.props.getListItem();
+      this.props.setViewMode();
+      }
+  }
+
   render(){
     return (
       <div className='rounded-3 bg-blue'>
@@ -35,12 +43,12 @@ class EditJourneyDetail extends Component {
             <button className='mx-2 mt-3 btn btn-dark-blue' onClick={() => this.props.setViewMode()}>Cancel</button>
             <input className='mx-2 mt-3 btn btn-danger' type="submit" value="Submit" />
           </div>
-          <div className='my-3 mx-5 px-lg-5'>
-            <label className="form-label">Name:</label>
+          <div className='my-3 mx-5 px-lg-5 d-flex flex-column'>
+            <label className="form-label">Name</label>
             <input className="form-control" type="text" name="name" value={this.state.name} onChange={e => this.handleChange(e)}/>
           </div>
           <div className='my-4 mx-5 px-lg-5 pb-4'>
-            <label className="form-label">Expected duration:</label>
+            <label className="form-label">Expected Duration (hours)</label>
             <input className="form-control" type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
           </div>
         </form>

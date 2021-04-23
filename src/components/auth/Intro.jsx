@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import intro from './intro-image.svg';
+import {Link} from 'react-router-dom';
  
 class Intro extends Component {
  
@@ -11,7 +12,7 @@ class Intro extends Component {
             <h2 className='Big-top-margin text-white text-lg-start fs-1 fw-bold mx-5'>Employee onboarding has never been easier.</h2>
             <p className='text-white text-lg-start mx-5 my-4'>Transform your team onboarding process by creating <b>highly-customizable and flexible paths</b>. 
             Include courses, ramp up projects and track progress.</p>
-            <button className='btn-red btn btn-primary btn-lg rounded-pill align-self-lg-start mx-5 px-4'>Get started!</button>
+            <Link className='align-self-lg-start' to={"/signup"}><button className='btn-red btn btn-primary btn-lg rounded-pill mx-5 px-4'>Get started!</button></Link>
           </div>
           <div className='col-sm'>
             <img className='intro-img' alt='intro' src={intro}/>

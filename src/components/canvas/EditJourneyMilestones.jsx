@@ -73,6 +73,14 @@ class EditJourneyMilestones extends Component {
       .catch(err => console.log(err))
   }
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.match.params.id !== this.props.match.params.id) {
+      this.props.getListItem();
+      this.props.getJourneyDetails();
+      this.props.setViewMode();
+      }
+  }
+
   render() {
     return (
         <div className='rounded-3 bg-blue'>
@@ -99,7 +107,8 @@ class EditJourneyMilestones extends Component {
               {<ul className="list-group">
                 {this.state.filteredMilestones.map(milestone => {
                 return <MilestoneCard key={milestone._id} milestone={milestone} removeBtn={false} addMilestoneToJourney={this.addMilestoneToJourney} 
-                selectedMilestones={this.state.listJourneyDetails.map((journeyDetail) => journeyDetail.milestone._id)}/>
+                selectedMilestones={this.state.listJourneyDetails.map((journeyDetail) => journeyDetail.milestone._id)} 
+                selectedOrder={this.state.listJourneyDetails.map((journeyDetail) => journeyDetail.order)}/>
                 })}
               </ul>}
             </div>

@@ -19,8 +19,9 @@ class Login extends Component {
         if(response.message) {
           this.setState({...this.state, error: response.message})
         } else {
-          this.setState({email: '', password: '', error: null, redirect: this.getRolePath(response)});
+          this.setState({email: '', password: '', error: null});
           this.props.setUser(response)
+          this.props.history.push(this.getRolePath(response))
         }
     })
     .catch(err => alert(err))
@@ -33,7 +34,7 @@ class Login extends Component {
 
   getRolePath = (user) => {
     if(!user) {
-      return null;
+      return '/';
     } else if (user.role === 'Team Leader') {
       return '/home-leader';
     } else if (user.role === 'Team Member') {
@@ -44,19 +45,20 @@ class Login extends Component {
   }
  
   render() {
+    console.log('state', this.state)
     return(
-        <div className='container-fluid d-flex h-100 flex-column text-white'>
+        <div className='container-fluid d-flex h-100 flex-column align-items-center text-white'>
         {this.state.redirect && <Redirect to={this.state.redirect}/>}
         <div className='row'>
           <div className='col-sm d-flex flex-column justify-content-evenly align-items-center'>
             <form className='w-75 m-5' onSubmit={this.handleFormSubmit}>
-              <div className='mb-3 mx-lg-5 px-lg-5'>
-                <label className="form-label">Email:</label>
+              <div className='mb-3'>
+                <label className="form-label">Email</label>
                 <input className="form-control" type="email" name="email" value={this.state.email} onChange={ e => this.handleChange(e)}/>
               </div>
 
-              <div className='mb-3 mx-lg-5 px-lg-5'>
-                <label className="form-label">Password:</label>
+              <div className='mb-3'>
+                <label className="form-label">Password</label>
                 <input className="form-control" type='password' name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
               </div>
           

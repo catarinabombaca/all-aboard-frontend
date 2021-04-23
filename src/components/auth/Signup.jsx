@@ -25,10 +25,10 @@ class Signup extends Component {
               email: '',
               firstTime: true,
               role: 'Team Member',
-              redirect: this.getRolePath(response),
               error: null
           });
           this.props.setUser(response)
+          this.props.history.push(this.getRolePath(response))
         }
     })
     .catch( err => alert(err) )
@@ -53,28 +53,28 @@ class Signup extends Component {
  
   render(){
     return(
-        <div className='container-fluid d-flex h-100 flex-column text-white'>
+        <div className='container-fluid d-flex h-100 flex-column align-items-center text-white'>
         {this.state.redirect && <Redirect to={this.state.redirect}/>}
         <div className='row'>
           <div className='col-sm d-flex flex-column justify-content-evenly align-items-center'>
             <form className='w-75 m-5' onSubmit={this.handleFormSubmit}>
-              <div className='mb-3 mx-lg-5 px-lg-5'>
-                <label className="form-label">Username:</label>
+              <div className='mb-3'>
+                <label className="form-label">Username</label>
                 <input className="form-control" type="text" name="username" value={this.state.username} onChange={ e => this.handleChange(e)}/>
               </div>
 
-              <div className='mb-3 mx-lg-5 px-lg-5'>
-              <label className="form-label">Email:</label>
+              <div className='mb-3'>
+              <label className="form-label">Email</label>
               <input className="form-control" type="email" name="email" value={this.state.email} onChange={ e => this.handleChange(e)}/>
               </div>
 
-              <div className='mb-3 mx-lg-5 px-lg-5'>
-              <label className="form-label">Password:</label>
+              <div className='mb-3'>
+              <label className="form-label">Password</label>
               <input className="form-control" type='password' name="password" value={this.state.password} onChange={ e => this.handleChange(e)} />
               </div>
 
-              <div className='mb-3 mx-lg-5 px-lg-5'>
-              <label className="form-label">Role:</label>
+              <div className='mb-3'>
+              <label className="form-label">Role</label>
               <select className="form-select" name="role" value={this.state.role} onChange={ e => this.handleChange(e)}>
                 <option value="Team Member">Team Member</option>
                 <option value="Team Leader">Team Leader</option>

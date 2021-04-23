@@ -28,9 +28,9 @@ class CreateJourney extends Component {
       <div>
         <h3>Create Journey</h3>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Name:</label>
+          <label>Name</label>
           <input type="text" name="name" value={this.state.name} onChange={e => this.handleChange(e)}/>
-          <label>Expected duration:</label>
+          <label>Expected Duration</label>
           <input type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
               
           <button onClick={() => this.props.history.push('/canvas')}>Cancel</button>

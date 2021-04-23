@@ -83,9 +83,9 @@ class MilestoneDetails extends Component {
         </div>}
 
         {this.state.mode === 'editMilestone' && <EditMilestone milestone={this.state.milestone} tasks={this.state.tasks} 
-          setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
+          setViewMode={this.setViewMode} getListItem={this.getListItem} getMilestoneTasks={this.getMilestoneTasks} {...this.props}/>}
         {this.state.mode === 'editMilestoneTasks' && <EditMilestoneTasks tasks={this.state.tasks} getMilestoneTasks={this.getMilestoneTasks}
-          setViewMode={this.setViewMode} {...this.props}/>}
+          setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
     </div>
     )
   }
