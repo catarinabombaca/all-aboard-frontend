@@ -11,6 +11,7 @@ import TaskService from './task-service';
 import CreateTask from './CreateTask';
 import CreateMilestone from './CreateMilestone';
 import CreateJourney from './CreateJourney';
+
  
 class Canvas extends Component {
 
@@ -96,17 +97,17 @@ class Canvas extends Component {
 
       {!this.props.create && <div className='bg-shape  m-3 flex-grow-1 d-flex flex-column'>
           <div className='d-flex flex-row mx-5 my-4 justify-content-between align-items-center'>
-            <h4>{this.state.tab}</h4>
+            <h3>{this.state.tab}</h3>
             <button className='btn btn-outline-light btn-lg rounded-pill m-2 px-4' onClick={() => {this.props.history.push('/canvas/create')}}>Create {this.state.tab}</button>
           </div>
-          <div className='container flex-grow-1'>
-              <div className='row h-100 align-items-start justify-content-evenly'>
-                  <div className="col-sm-4">
+          <div className='container-fluid flex-grow-1'>
+              <div className='row h-100 align-items-start justify-content-evenly m-3'>
+                  <div className="col-sm-4 mb-2">
                   <List data={this.state.data} {...this.props}/>
                   </div>
-                {!this.props.match.params.id && <div className="col-sm-8">
-                    <h4>No item selected</h4>
-                    <img className='wait-img' alt='waiting' src={waiting}/>
+                {!this.props.match.params.id && <div className="col-sm-8 d-flex flex-column align-items-center justify-content-evenly">
+                    <h5 className='w-100 mb-3'>No item selected!</h5>
+                    <img className='wait-img my-4 ms-5' alt='waiting' src={waiting}/>
                 </div>}
                 {this.props.match.params.id && this.state.tab === 'Tasks' && <TaskDetails getTasks={this.getTasks} {...this.props}/>}
                 {this.props.match.params.id && this.state.tab === 'Milestones' && <MilestoneDetails getMilestones={this.getMilestones} {...this.props}/>}

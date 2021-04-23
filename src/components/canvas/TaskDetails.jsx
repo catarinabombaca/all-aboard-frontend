@@ -39,7 +39,7 @@ class TaskDetails extends Component {
 }
 
   componentDidUpdate(prevProps) {
-    if(prevProps.match.params.id.id !== this.props.match.params.id.id) {
+    if(prevProps.match.params.id !== this.props.match.params.id) {
         this.getListItem();
         }
     }

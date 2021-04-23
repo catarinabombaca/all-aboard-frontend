@@ -74,24 +74,36 @@ class EditJourneyMilestones extends Component {
   }
 
   render() {
-    console.log(this.state.listJourneyDetails)
     return (
-        <div>
-        <ul>
-        {this.state.listJourneyDetails.map(journeyDetail => {
-            return <MilestoneCard key={journeyDetail._id} journeyDetail={journeyDetail} removeBtn={true} removeMilestoneFromJourney={this.removeMilestoneFromJourney} 
-            selectedMilestones={this.state.listJourneyDetails.map((journeyDetail) => journeyDetail.milestone._id)}/>
-        })}
-        </ul>
-        <input type='text' name='search' onChange={this.handleChange}/>
-        <ul>
-        {this.state.filteredMilestones.map(milestone => {
-           return <MilestoneCard key={milestone._id} milestone={milestone} removeBtn={false} addMilestoneToJourney={this.addMilestoneToJourney} 
-           selectedMilestones={this.state.listJourneyDetails.map((journeyDetail) => journeyDetail.milestone._id)}/>
-        })}
-        </ul>
-        <button onClick={() => this.props.setViewMode()}>Cancel</button>
-        <button onClick={() => this.saveMilestonesChanges()}>Save Changes</button>
+        <div className='rounded-3 bg-blue'>
+          <div className='d-flex flex-row justify-content-end'>
+            <h4 className='mt-3 flex-grow-1 text-start ps-4'>Edit Journey Details</h4>
+            <button className='mx-2 mt-3 btn btn-light' onClick={() => this.props.setViewMode()}>Cancel</button>
+            <button className='mx-2 mt-3 btn btn-danger' onClick={() => this.saveMilestonesChanges()}>Save Changes</button>
+          </div>
+          <div className='container-fluid'>
+          <div className='row h-100 align-items-start justify-content-evenly m-1 mt-3 pb-3'>
+            <div className='col-sm mb-2'>
+            <ul className="list-group"> {this.state.listJourneyDetails.
+                      sort((a, b) => a.order - b.order).map(journeyDetail => {
+                        return <MilestoneCard key={journeyDetail._id} journeyDetail={journeyDetail} 
+                      removeBtn={true} removeMilestoneFromJourney={this.removeMilestoneFromJourney} 
+                      selectedMilestones={this.state.listJourneyDetails.map((journeyDetail) => journeyDetail.milestone._id)}/>})}
+            </ul>
+            </div>
+
+            <div className='col-sm mb-2'>
+              <input className='w-100 mb-3 rounded-3 ps-2'type='text' name='search' onChange={this.handleChange}/>
+              {this.state.filteredMilestones.length === 0 && <p>No results found!</p>}
+              {<ul className="list-group">
+                {this.state.filteredMilestones.map(milestone => {
+                return <MilestoneCard key={milestone._id} milestone={milestone} removeBtn={false} addMilestoneToJourney={this.addMilestoneToJourney} 
+                selectedMilestones={this.state.listJourneyDetails.map((journeyDetail) => journeyDetail.milestone._id)}/>
+                })}
+              </ul>}
+            </div>
+            </div>
+          </div>
         </div>
     )
   }

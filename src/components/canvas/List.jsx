@@ -8,9 +8,9 @@ class List extends Component {
         <ul className='list-group'>
         {this.props.data.map(item => {
            return <li key={item._id} 
-           class={this.props.match.params.id === item._id ? "list-group-item list-group-item-info": "list-group-item"} 
+           className={this.props.match.params.id === item._id ? "list-group-item list-group-item-primary": "list-group-item"} 
            aria-current={this.props.match.params.id === item._id ? 'true' : 'false'}>
-             <Link className='text-decoration-none text-dark' to={`/canvas/${item._id}`}>
+             <Link className='text-decoration-none list-group-item-primary' to={`/canvas/${item._id}`}>
                <h5>{item.name}</h5>
              </Link>
             </li>

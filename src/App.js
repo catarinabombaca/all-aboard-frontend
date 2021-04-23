@@ -11,6 +11,8 @@ import HomeMember from './components/home/HomeMember';
 import Canvas from './components/canvas/Canvas';
 import Members from './components/members/Members';
 import MyTasks from './components/my-tasks/MyTasks';
+import UserProfile from './components/auth/UserProfile';
+import ProtectedRoute from './components/auth/protected-route';
 
 class App extends Component {
 
@@ -41,15 +43,16 @@ class App extends Component {
       </div>
       <div className='row flex-grow-1'>
         <Switch> 
-          <Route exact path='/canvas/create' render={(props) => <Canvas {...props} create={true}/>}/>  
-          <Route exact path='/canvas/:id' render={(props) => <Canvas {...props}/>}/>
-          <Route exact path='/canvas' render={(props) => <Canvas {...props}/>}/>
-          <Route exact path='/users/:id' render={(props) => <Members {...props} loggedInUser={this.state.loggedInUser}/>}/>
-          <Route exact path='/users' render={(props) => <Members {...props} loggedInUser={this.state.loggedInUser}/>}/>
-          <Route exact path='/home-leader' render={() => <HomeLeader/>}/>
-          <Route exact path='/my-tasks/:id' render={(props) => <MyTasks {...props} loggedInUser={this.state.loggedInUser}/>}/>
-          <Route exact path='/my-tasks' render={(props) => <MyTasks {...props} loggedInUser={this.state.loggedInUser}/>}/>
-          <Route exact path='/home-member' render={() => <HomeMember/>}/>
+          <ProtectedRoute exact path='/canvas/create' component={Canvas} loggedInUser={this.state.loggedInUser} create={true}/>  
+          <ProtectedRoute exact path='/canvas/:id' component={Canvas} loggedInUser={this.state.loggedInUser}/>
+          <ProtectedRoute exact path='/canvas' component={Canvas} loggedInUser={this.state.loggedInUser}/>
+          <ProtectedRoute exact path='/users/:id' component={Members} loggedInUser={this.state.loggedInUser}/>
+          <ProtectedRoute exact path='/users' component={Members} loggedInUser={this.state.loggedInUser}/>
+          <ProtectedRoute exact path='/home-leader' component={HomeLeader} loggedInUser={this.state.loggedInUser}/>
+          <ProtectedRoute exact path='/my-tasks/:id' component={MyTasks} loggedInUser={this.state.loggedInUser}/>
+          <ProtectedRoute exact path='/my-tasks' component={MyTasks} loggedInUser={this.state.loggedInUser}/>
+          <ProtectedRoute exact path='/home-member' component={HomeMember} loggedInUser={this.state.loggedInUser}/>
+          <ProtectedRoute exact path="/user-profile" component={UserProfile} loggedInUser={this.state.loggedInUser} setUser={this.setTheUser}/>
           <Route exact path="/signup" render={() => <Signup setUser={this.setTheUser}/>}/>
           <Route exact path='/login' render={() => <Login setUser={this.setTheUser}/>}/>
           <Route exact path='/' component={Intro}/>

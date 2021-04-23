@@ -36,29 +36,29 @@ class NavBar extends Component {
       <nav className="Main-nav navbar navbar-expand-lg navbar-dark">
         <div className="container-fluid">
         <Link className="navbar-brand mb-0 fs-2 fw-bold" to={this.getRolePath(this.state.loggedInUser)}>all aboard.</Link>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
         </button>
-        {!this.state.loggedInUser && <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        {!this.state.loggedInUser && <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
             <li className='nav-item navbar-text'><Link className='nav-link' aria-current="page" to='/login'>Log in</Link></li>
             <li className='nav-item'><Link className='btn btn-outline-light btn-lg rounded-pill m-2 px-4' to='/signup'>Sign up</Link></li>
           </ul>
         </div>}
 
-          {this.state.loggedInUser && <div class="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+          {this.state.loggedInUser && <div className="collapse navbar-collapse justify-content-start" id="navbarSupportedContent">
+          <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
             {this.state.loggedInUser.role === 'Team Leader' && <li className='nav-item navbar-text'><Link className='nav-link' to='/users'>Members</Link></li>}
             {this.state.loggedInUser.role === 'Team Leader' && <li className='nav-item navbar-text'><Link className='nav-link' to='/canvas'>Canvas</Link></li>}
             {this.state.loggedInUser.role === 'Team Member' && <li className='nav-item navbar-text'><Link className='nav-link' to='/my-tasks'>My Tasks</Link></li>}
           </ul>
           </div>}
 
-          {this.state.loggedInUser && <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-          <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+          {this.state.loggedInUser && <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
             <li className='nav-item'><Link to='/'><button className='btn-link btn-lg m-2 px-4' onClick={() => this.logoutUser()}>Log out</button></Link></li>
             <li className='nav-item navbar-text text-white'>
-              <Link className='nav-link'>
+              <Link className='nav-link' to='/user-profile'>
                 {this.state.loggedInUser.username}
                 <img className="nav-user-img rounded-circle ms-3" alt={this.state.loggedInUser.username} src={this.state.loggedInUser.imageUrl}/>
               </Link>

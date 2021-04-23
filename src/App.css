@@ -131,4 +131,8 @@ fieldset[disabled] .btn-link.active {
   border-radius: 12px;
 }
 
+.bg-blue {
+  background-color: #5FA8D3;
+}
+
 

@@ -49,7 +49,7 @@ class JourneyDetails extends Component {
     }
 
     componentDidUpdate(prevProps) {
-      if(prevProps.match.params.id.id !== this.props.match.params.id.id) {
+      if(prevProps.match.params.id !== this.props.match.params.id) {
         this.getListItem();
         this.getJourneyDetails();
         }
@@ -61,17 +61,26 @@ class JourneyDetails extends Component {
     return (
     <div className="col-sm-8">
       {this.state.mode === 'view' && <div>
-        <button onClick={() => this.setEditMode('Journey')}>Edit</button>
-        <button onClick={() => this.deleteItem()}>Delete</button>
-        <h5>{name}</h5>
-        <p>Expected duration: {expectedDuration}h</p>
-        <button onClick={() => this.setEditMode('JourneyMilestones')}>Edit</button>
-        {journeyDetails.length !==0 && <div>
-        <h6>Milestones:</h6>
-          <ul>
-          {journeyDetails.map((detail) => <li key={detail._id}>{detail.order} - {detail.milestone.name}</li>)}
-          </ul></div>}
-    </div>}
+        <div className='rounded-3 bg-blue'>
+          <div className='d-flex flex-row justify-content-end'>
+            <h4 className='mt-3 flex-grow-1 text-start ps-4'>{name}</h4>
+            <button className='mx-2 mt-3 btn btn-light' onClick={() => this.setEditMode('Journey')}>Edit</button>
+            <button className='mx-2 mt-3 btn btn-danger' onClick={() => this.deleteItem()}>Delete</button>
+          </div>
+           <p className='text-start ps-4 fs-5 pb-3'>Expected duration: {expectedDuration}h</p>
+        </div>
+
+        <div className='rounded-3 bg-blue'>
+          <div className='d-flex flex-row justify-content-end'>
+           <h4 className='mt-3 flex-grow-1 text-start ps-4'>Milestones:</h4>
+           <button className='mx-2 mt-3 btn btn-light' onClick={() => this.setEditMode('JourneyMilestones')}>Edit</button>
+          </div>
+           {journeyDetails.length !==0 && <ul className='pb-3'>
+          {journeyDetails.sort((a, b) => a.order - b.order)
+                          .map((detail) => <li className='text-start fs-5 list-unstyled' key={detail._id}>{detail.order} - {detail.milestone.name}</li>)}
+          </ul>}
+        </div>
+      </div>}
     {this.state.mode === 'editJourney' && <EditJourneyDetail journeyDetails={journeyDetails} journey={this.state.journey} 
           setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
     {this.state.mode === 'editJourneyMilestones' && <EditJourneyMilestones journeyDetails={journeyDetails} getJourneyDetails={this.getJourneyDetails}
