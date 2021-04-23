@@ -39,7 +39,7 @@ class EditProfile extends Component {
   render() {
       console.log('state',this.state)
     return (
-      <div>
+      <div className='col-sm d-flex flex-column justify-content-evenly align-items-center'>
       <form className='w-75 m-5' onSubmit={this.handleSubmit}>
               <div className='mb-3 mx-lg-5 px-lg-5'>
                 <label className="form-label">Username:</label>

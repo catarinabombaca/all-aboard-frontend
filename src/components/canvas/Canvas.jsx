@@ -97,7 +97,7 @@ class Canvas extends Component {
 
       {!this.props.create && <div className='bg-shape  m-3 flex-grow-1 d-flex flex-column'>
           <div className='d-flex flex-row mx-5 my-4 justify-content-between align-items-center'>
-            <h3>{this.state.tab}</h3>
+            <h3 className='text-white'>{this.state.tab}</h3>
             <button className='btn btn-outline-light btn-lg rounded-pill m-2 px-4' onClick={() => {this.props.history.push('/canvas/create')}}>Create {this.state.tab}</button>
           </div>
           <div className='container-fluid flex-grow-1'>
@@ -106,8 +106,10 @@ class Canvas extends Component {
                   <List data={this.state.data} {...this.props}/>
                   </div>
                 {!this.props.match.params.id && <div className="col-sm-8 d-flex flex-column align-items-center justify-content-evenly">
-                    <h5 className='w-100 mb-3'>No item selected!</h5>
-                    <img className='wait-img my-4 ms-5' alt='waiting' src={waiting}/>
+                    <div className='rounded-3 bg-blue w-100'>
+                        <img className='wait-img my-5 ms-5' alt='waiting' src={waiting}/>
+                        <p className='w-100 mb-3'>No item selected!</p>
+                    </div>
                 </div>}
                 {this.props.match.params.id && this.state.tab === 'Tasks' && <TaskDetails getTasks={this.getTasks} {...this.props}/>}
                 {this.props.match.params.id && this.state.tab === 'Milestones' && <MilestoneDetails getMilestones={this.getMilestones} {...this.props}/>}

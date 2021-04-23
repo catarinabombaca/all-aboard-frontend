@@ -64,23 +64,25 @@ class JourneyDetails extends Component {
         <div className='rounded-3 bg-blue'>
           <div className='d-flex flex-row justify-content-end'>
             <h4 className='mt-3 flex-grow-1 text-start ps-4'>{name}</h4>
-            <button className='mx-2 mt-3 btn btn-light' onClick={() => this.setEditMode('Journey')}>Edit</button>
+            <button className='mx-2 mt-3 btn btn-dark-blue' onClick={() => this.setEditMode('Journey')}>Edit</button>
             <button className='mx-2 mt-3 btn btn-danger' onClick={() => this.deleteItem()}>Delete</button>
           </div>
-           <p className='text-start ps-4 fs-5 pb-3'>Expected duration: {expectedDuration}h</p>
+           <p className='text-start ps-4 fs-5 pb-3'><b>Expected duration:</b> {expectedDuration}h</p>
         </div>
 
         <div className='rounded-3 bg-blue'>
           <div className='d-flex flex-row justify-content-end'>
            <h4 className='mt-3 flex-grow-1 text-start ps-4'>Milestones:</h4>
-           <button className='mx-2 mt-3 btn btn-light' onClick={() => this.setEditMode('JourneyMilestones')}>Edit</button>
+           <button className='mx-2 mt-3 btn btn-dark-blue' onClick={() => this.setEditMode('JourneyMilestones')}>Edit</button>
           </div>
+          {journeyDetails.length === 0 && <p className='pb-4'>No milestones yet!</p>}
            {journeyDetails.length !==0 && <ul className='pb-3'>
           {journeyDetails.sort((a, b) => a.order - b.order)
                           .map((detail) => <li className='text-start fs-5 list-unstyled' key={detail._id}>{detail.order} - {detail.milestone.name}</li>)}
           </ul>}
         </div>
       </div>}
+
     {this.state.mode === 'editJourney' && <EditJourneyDetail journeyDetails={journeyDetails} journey={this.state.journey} 
           setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
     {this.state.mode === 'editJourneyMilestones' && <EditJourneyMilestones journeyDetails={journeyDetails} getJourneyDetails={this.getJourneyDetails}

@@ -9,6 +9,7 @@ import JourneyDetailsProgressService from './journey-p-details-service';
 import TaskService from '../canvas/task-service';
 import MilestoneService from '../canvas/milestone-service';
 import TaskProgressService from './task-p-service';
+import noJourney from './no-journey.svg'
  
 class MemberDetails extends Component {
 
@@ -122,17 +123,19 @@ class MemberDetails extends Component {
 
   render() {
     return (
-      <div>
+      <div className='col-sm rounded-3 bg-blue mx-5 my-1'>
         {this.state.member && <div>
         <UserHeader member={this.state.member}/>
         {!this.state.member.journeyProgress && <div>
-          No journey yet!
+          <img className='wait-img' alt='no-journey' src={noJourney}/>
+          <p>No journey yet!</p>
           <form onSubmit={this.handleFormSubmit}>
-          <label>Select journey:</label>
-          <select name="assignedJourneyId" value={this.state.assignedJourneyId} onChange={ e => this.handleChange(e)}>
+            <div className='my-3 mx-5 px-lg-5'>
+              <select className="form-control" name="assignedJourneyId" value={this.state.assignedJourneyId} onChange={ e => this.handleChange(e)}>
               {this.state.journeys.map(journey => <option value={journey._id}>{journey.name}</option>)}
-          </select>
-          <input type="submit" value="Assign" />
+              </select>
+              <input className='mx-2 mt-3 btn btn-danger' type="submit" value="Assign" />
+            </div>
         </form>
         </div>}
         {this.state.member.journeyProgress && <div>Journey progress</div>}

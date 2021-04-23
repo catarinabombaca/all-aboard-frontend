@@ -57,21 +57,35 @@ class EditMilestoneTasks extends Component {
 
   render() {
     return (
-        <div>
-        <ul>
-        {this.state.listTasks.map(task => {
-            return <TaskCard key={task._id} task={task} removeBtn={true} removeTaskFromMilestone={this.removeTaskFromMilestone} selectedTasks={this.state.listTasks.map((task) => task._id)}/>
-        })}
-        </ul>
-        <input type='text' name='search' onChange={this.handleChange}/>
-        <ul>
-        {this.state.filteredTasks.map(task => {
-           return <TaskCard key={task._id} task={task} removeBtn={false} addTaskToMilestone={this.addTaskToMilestone} selectedTasks={this.state.listTasks.map((task) => task._id)}/>
-        })}
-        </ul>
-        <button onClick={() => this.props.setViewMode()}>Cancel</button>
-        <button onClick={() => this.saveTasksChanges()}>Save Changes</button>
+        <div className='rounded-3 bg-blue'>
+          <div className='d-flex flex-row justify-content-end'>
+            <h4 className='mt-3 flex-grow-1 text-start ps-4'>Edit Tasks</h4>
+            <button className='mx-2 mt-3 btn btn-light btn-dark-blue' onClick={() => this.props.setViewMode()}>Cancel</button>
+            <button className='mx-2 mt-3 btn btn-danger' onClick={() => this.saveTasksChanges()}>Save Changes</button>
+          </div>
+          <div className='container-fluid'>
+          <div className='row h-100 align-items-start justify-content-evenly m-1 mt-3 pb-3'>
+            <div className='col-sm mb-2'>
+            {this.state.listTasks.length === 0 && <p className='p-4'>Added tasks will show up here.</p>}
+            <ul className="list-group">
+              {this.state.listTasks.map(task => {
+                return <TaskCard key={task._id} task={task} removeBtn={true} removeTaskFromMilestone={this.removeTaskFromMilestone} selectedTasks={this.state.listTasks.map((task) => task._id)}/>
+            })}
+            </ul>
+            </div>
+
+            <div className='col-sm mb-2'>
+              <input className='w-100 mb-3 rounded-3 ps-2' type='text' name='search' onChange={this.handleChange}/>
+              {this.state.filteredTasks.length === 0 && <p>No results found!</p>}
+              <ul className="list-group">
+              {this.state.filteredTasks.map(task => {
+                return <TaskCard key={task._id} task={task} removeBtn={false} addTaskToMilestone={this.addTaskToMilestone} selectedTasks={this.state.listTasks.map((task) => task._id)}/>
+              })}
+              </ul>
+            </div>
+          </div>
         </div>
+      </div>
     )
   }
 }

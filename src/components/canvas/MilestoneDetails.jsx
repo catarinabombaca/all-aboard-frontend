@@ -60,21 +60,31 @@ class MilestoneDetails extends Component {
     return (
     <div className="col-sm-8">
         {this.state.mode === 'view' && <div>
-        <button onClick={() => this.setEditMode("Milestone")}>Edit</button>
-        <button onClick={() => this.deleteItem()}>Delete</button>
-        <h5>{name}</h5>
-        <p>Description: {description}</p>
-        <p>Expected duration: {expectedDuration}h</p>
-        {tasks.length !==0 && <div>
-          <h6>Associated tasks:</h6>
-          <button onClick={() => this.setEditMode("MilestoneTasks")}>Edit</button>
-          <ul>
-          {tasks.map((task) => <li key={task._id}>{task.name}</li>)}
-          </ul></div>}
-          </div>}
-          {this.state.mode === 'editMilestone' && <EditMilestone milestone={this.state.milestone} tasks={this.state.tasks} 
+          <div className='rounded-3 bg-blue'>
+            <div className='d-flex flex-row justify-content-end'>
+              <h4 className='mt-3 flex-grow-1 text-start ps-4'>{name}</h4>
+              <button className='mx-2 mt-3 btn btn-dark-blue' onClick={() => this.setEditMode("Milestone")}>Edit</button>
+              <button className='mx-2 mt-3 btn btn-danger' onClick={() => this.deleteItem()}>Delete</button>
+            </div>
+            <div>
+              <p className='text-start ps-4 fs-5'><b>Description: </b>{description}</p>
+              <p className='text-start ps-4 fs-5 pb-3'><b>Expected duration:</b> {expectedDuration}h</p>
+            </div>
+          </div>
+
+          <div className='rounded-3 bg-blue'>
+            <div className='d-flex flex-row justify-content-end'>
+              <h4 className='mt-3 flex-grow-1 text-start ps-4'>Associated tasks:</h4>
+              <button className='mx-2 mt-3 btn btn-dark-blue' onClick={() => this.setEditMode("MilestoneTasks")}>Edit</button>
+            </div>
+            {tasks.length ===0 && <p className='pb-4'>No tasks yet!</p>}
+            {tasks.length !==0 && <ul className='pb-3'>{tasks.map((task) => <li  className='text-start fs-5 list-unstyled' key={task._id}>{task.name}</li>)}</ul>}
+          </div>
+        </div>}
+
+        {this.state.mode === 'editMilestone' && <EditMilestone milestone={this.state.milestone} tasks={this.state.tasks} 
           setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
-          {this.state.mode === 'editMilestoneTasks' && <EditMilestoneTasks tasks={this.state.tasks} getMilestoneTasks={this.getMilestoneTasks}
+        {this.state.mode === 'editMilestoneTasks' && <EditMilestoneTasks tasks={this.state.tasks} getMilestoneTasks={this.getMilestoneTasks}
           setViewMode={this.setViewMode} {...this.props}/>}
     </div>
     )

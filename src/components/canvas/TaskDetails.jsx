@@ -45,22 +45,27 @@ class TaskDetails extends Component {
     }
  
   render() {
-    console.log(this.props)
-    const {name, description, type, expectedDuration, milestones} = this.state.task
+    const {name, description, type, expectedDuration, course, docURL} = this.state.task
     return (
     <div className="col-sm-8">
         {this.state.mode === 'view' && <div>
-        <button onClick={() => this.setEditMode()}>Edit</button>
-        <button onClick={() => this.deleteItem()}>Delete</button>
-        <h5>{name}</h5>
-        <p>Type: {type}</p>
-        <p>Description: {description}</p>
-        <p>Expected duration: {expectedDuration}h</p>
-        <h6>Associated milestones:</h6>
-        {milestones && <ul>
-          {milestones.map((milestone) => <li key={milestone._id}>{milestone.name}</li>)}
-          </ul>}
+        <div className='rounded-3 bg-blue'>
+          <div className='d-flex flex-row justify-content-end'>
+            <h4 className='mt-3 flex-grow-1 text-start ps-4'>{name}</h4>
+            <button className='mx-2 mt-3 btn btn-dark-blue' onClick={() => this.setEditMode()}>Edit</button>
+            <button  className='mx-2 mt-3 btn btn-danger' onClick={() => this.deleteItem()}>Delete</button>
+          </div>
+
+        <div>
+          <p className='text-start ps-4 fs-5'><b>Type:</b> {type}</p>
+          <p className='text-start ps-4 fs-5'><b>Description:</b> {description}</p>
+          {type === 'Course' && <p className='text-start ps-4 fs-5'><b>Link to course:</b> {course}</p>}
+          {type !== 'Course' && <p className='text-start ps-4 fs-5'><b>Further documentation:</b> {docURL}</p>}
+          <p className='text-start ps-4 fs-5 pb-3'><b>Expected duration:</b> {expectedDuration}h</p>
+        </div>
+        </div>
         </div>}
+
         {this.state.mode === 'edit' && <EditTask task={this.state.task} setViewMode={this.setViewMode} getListItem={this.getListItem} {...this.props}/>}
     </div>
     )
