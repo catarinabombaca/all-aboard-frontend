@@ -40,8 +40,8 @@ class CreateMilestone extends Component {
             <label className='form-label'>Expected Duration</label>
             <input className='form-control'type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
           </div>
-          <button onClick={() => this.props.history.push('/canvas')}>Cancel</button>
-          <input type="submit" value="Submit"/>
+          <button className='mx-2 mt-3 btn btn-dark-blue' onClick={() => this.props.history.push('/canvas')}>Cancel</button>
+          <input className='mx-2 mt-3 btn btn-danger' type="submit" value="Submit"/>
         </form>
       </div>
     )
