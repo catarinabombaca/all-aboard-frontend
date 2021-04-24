@@ -15,7 +15,7 @@ class MemberDetails extends Component {
 
     state = {member: {}, assignedJourneyId: '', journeys: []}
     userService = new UserService();
-    journeyService = new JourneyService;
+    journeyService = new JourneyService();
     journeyProgressService = new JourneyProgressService();
     journeyDetailService = new JourneyDetailService();
     milestoneProgressService = new MilestoneProgressService();

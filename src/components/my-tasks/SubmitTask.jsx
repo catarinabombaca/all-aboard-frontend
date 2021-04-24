@@ -7,7 +7,6 @@ class SubmitTask extends Component {
   
   handleFormSubmit = (event) => {
     event.preventDefault();
-    const {params} = this.props.match
 
     this.props.submitTask({
         end: Date.now(),

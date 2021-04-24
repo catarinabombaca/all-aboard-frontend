@@ -93,8 +93,7 @@ class EditJourneyMilestones extends Component {
           <div className='row h-100 align-items-start justify-content-evenly m-1 mt-3 pb-3'>
             <div className='col-sm mb-2'>
             {this.state.listJourneyDetails.length === 0 && <p className='p-4'>Added milestones will show up here.</p>}
-            <ul className="list-group"> {this.state.listJourneyDetails.
-                      sort((a, b) => a.order - b.order).map(journeyDetail => {
+            <ul className="list-group"> {this.state.listJourneyDetails.sort((a, b) => a.order - b.order).map(journeyDetail => {
                         return <MilestoneCard key={journeyDetail._id} journeyDetail={journeyDetail} 
                       removeBtn={true} removeMilestoneFromJourney={this.removeMilestoneFromJourney} 
                       selectedMilestones={this.state.listJourneyDetails.map((journeyDetail) => journeyDetail.milestone._id)}/>})}

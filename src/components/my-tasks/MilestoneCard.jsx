@@ -20,7 +20,7 @@ export default class MilestoneCard extends Component {
 
 
     render() {
-        const {name, description, expectedDuration, _id} = this.props.milestone
+        const {name, _id} = this.props.milestone
         return (
         <div className='accordion-item'>
             <h2 className="accordion-header" id={`heading${_id}`}>
