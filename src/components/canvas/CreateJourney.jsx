@@ -26,15 +26,19 @@ class CreateJourney extends Component {
   render(){
     return (
       <div>
-        <h3>Create Journey</h3>
+        <h3 className='text-white'>Create Journey</h3>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Name</label>
-          <input type="text" name="name" value={this.state.name} onChange={e => this.handleChange(e)}/>
-          <label>Expected Duration</label>
-          <input type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
+          <div className='my-3 mx-5 px-lg-5 text-white'>
+            <label className='form-label'>Name</label>
+            <input className='form-control'type="text" name="name" value={this.state.name} onChange={e => this.handleChange(e)}/>
+          </div>
+          <div className='my-3 mx-5 px-lg-5 text-white'>
+            <label className='form-label'>Expected Duration</label>
+            <input className='form-control' type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
+          </div>
               
-          <button onClick={() => this.props.history.push('/canvas')}>Cancel</button>
-          <input type="submit" value="Submit" />
+          <button className='mx-2 mt-3 btn btn-dark-blue' onClick={() => this.props.history.push('/canvas')}>Cancel</button>
+          <input className='mx-2 mt-3 btn btn-danger' type="submit" value="Submit" />
         </form>
       </div>
     )

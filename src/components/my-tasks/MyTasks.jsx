@@ -26,9 +26,11 @@ class MyTasks extends Component {
 
   render() {
     return (
-      <div>
-      {this.state.journeyDetails.length !==0 && <JourneyList data={this.state.journeyDetails}/>}
-      {this.props.match.params.id && <TaskDetail {...this.props}/>}
+      <div className='container-fluid'>
+        <div className='row'>
+        {this.state.journeyDetails.length !==0 && <JourneyList data={this.state.journeyDetails}/>}
+        {this.props.match.params.id && <TaskDetail {...this.props}/>}
+        </div>
       </div>
     )
   }

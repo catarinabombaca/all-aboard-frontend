@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
 import MilestoneCard from './MilestoneCard';
  
 class JourneyList extends Component {
 
   render() {
     return (
-        <ul>
+        <div className="accordion col-12 col-lg-4" id="accordionExample">
         {this.props.data.map(item => {
            return <MilestoneCard key={item._id}  milestone={item.milestoneProgress}/>
         })}
-        </ul>
+        </div>
     )
   }
 }

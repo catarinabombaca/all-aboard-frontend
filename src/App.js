@@ -37,7 +37,7 @@ class App extends Component {
   render() {
     this.fetchUser()
     return (
-    <div className="App container-fluid d-flex h-100 flex-column">
+    <div className="App container-fluid d-flex flex-column">
       <div className='row'>
         <NavBar loggedInUser={this.state.loggedInUser} setUser={this.setTheUser}/> 
       </div>

@@ -68,15 +68,15 @@ class Members extends Component {
       <div className='container-fluid'>
         <div className='row h-100 justify-content-between align-items-start bg-shape mx-3'>
           <h3 className='text-white text-start mx-5 my-5'>Members</h3>
-          <div className='col-sm-4 d-flex flex-column justify-content-start align-items center mx-5 my-1 text-white'>
+          <div className='col-12 col-lg-4 d-flex flex-column justify-content-start align-items center text-white'>
             <input className='w-100 rounded-3' type='text' name='search' onChange={this.handleChange}/>
             <div>
               <input type='checkbox' name='myTeam' onChange={this.handleChange}/>
               <label className='p-2' htmlFor='myTeam'>Only show my team members</label>
             </div>
             <MembersList members={this.state.filteredMembers} addMemberToTeam={this.addMemberToTeam} {...this.props}/>
-          </div>
-          {!this.props.match.params.id && <div className="col-sm d-flex flex-column align-items-center justify-content-evenly">
+         </div>
+          {!this.props.match.params.id && <div className="col-12 col-lg-8 d-flex flex-column align-items-center justify-content-evenly">
                     <div className='rounded-3 bg-blue w-100'>
                         <img className='wait-img my-5 ms-5' alt='noUser' src={noUser}/>
                         <p className='w-100 mb-3'>No item selected!</p>

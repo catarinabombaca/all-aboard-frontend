@@ -108,7 +108,7 @@ class EditJourneyMilestones extends Component {
                 {this.state.filteredMilestones.map(milestone => {
                 return <MilestoneCard key={milestone._id} milestone={milestone} removeBtn={false} addMilestoneToJourney={this.addMilestoneToJourney} 
                 selectedMilestones={this.state.listJourneyDetails.map((journeyDetail) => journeyDetail.milestone._id)} 
-                selectedOrder={this.state.listJourneyDetails.map((journeyDetail) => journeyDetail.order)}/>
+                /*selectedOrder={this.state.listJourneyDetails.map((journeyDetail) => journeyDetail.order)}*//>
                 })}
               </ul>}
             </div>
