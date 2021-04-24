@@ -3,7 +3,7 @@ import axios from 'axios';
 class TaskProgressService {
   constructor() {
     let service = axios.create({
-      baseURL: 'http://localhost:5000/data',
+      baseURL: `${process.env.REACT_APP_API_URL}/data`,
       withCredentials: true
     });
     this.service = service;
