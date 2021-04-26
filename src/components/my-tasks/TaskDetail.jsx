@@ -33,7 +33,7 @@ class TaskDetail extends Component {
     }
  
   render() {
-    const {name, description, type, expectedDuration, docURL, status} = this.state.task
+    const {name, description, type, expectedDuration, docURL, course, status} = this.state.task
     return (
     <div className='col-12 col-lg-8 d-flex flex-column'>
         {<div className='rounded-3 bg-blue my-4 my-lg-0'>
@@ -41,8 +41,8 @@ class TaskDetail extends Component {
         <p><b>Type:</b> {type}</p>
         <p><b>Description:</b> {description}</p>
         <p><b>Expected duration:</b> {expectedDuration}h</p>
-        {type !== "Course" && <p><b>Further documentation:</b> {docURL}</p>}
-        {type === "Course" && <p><b>Course URL:</b> {docURL}</p>}
+        {type !== "Course" && <a href={docURL} target="_blank">Documentation URL</a>}
+        {type === "Course" && <a href={course} target="_blank">Course URL</a>}
         </div>}
         {status === "Pending" && <SubmitTask submitTask={this.submitTask} {...this.props}/>}
     </div>
