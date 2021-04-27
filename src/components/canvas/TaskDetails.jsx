@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import TaskService from './task-service';
 import EditTask from './EditTask';
-import {Link} from 'react-router-dom';
  
 class TaskDetails extends Component {
 
@@ -60,8 +59,8 @@ class TaskDetails extends Component {
         <div>
           <p className='text-start ps-4 fs-5'><b>Type:</b> {type}</p>
           <p className='text-start ps-4 fs-5'><b>Description:</b> {description}</p>
-          {type === 'Course' && <a href={course} target="_blank" className='text-start ps-4 fs-5'>Course URL</a>}
-          {type !== 'Course' && <a href={docURL} target="_blank" className='text-start ps-4 fs-5'>Documentation URL</a>}
+          {type === 'Course' && <a href={course} target="_blank" rel="noreferrer" className='text-start ps-4 fs-5'>Course URL</a>}
+          {type !== 'Course' && <a href={docURL} target="_blank" rel="noreferrer" className='text-start ps-4 fs-5'>Documentation URL</a>}
           <p className='text-start ps-4 fs-5 pb-3'><b>Expected duration:</b> {expectedDuration}h</p>
         </div>
         </div>

@@ -57,7 +57,7 @@ class CreateTask extends Component {
 
           <div className='my-3 mx-5 px-lg-5 text-white'>
             <label className='form-label'>Expected Duration</label>
-            <input className='form-control' className='form-control' type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
+            <input className='form-control' type="number" name="expectedDuration" value={this.state.expectedDuration} onChange={e => this.handleChange(e)}/>
           </div>
               
           <button className='mx-2 mt-3 btn btn-dark-blue' onClick={() => this.props.history.push('/canvas')}>Cancel</button>

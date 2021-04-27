@@ -41,8 +41,8 @@ class TaskDetail extends Component {
         <p><b>Type:</b> {type}</p>
         <p><b>Description:</b> {description}</p>
         <p><b>Expected duration:</b> {expectedDuration}h</p>
-        {type !== "Course" && <a href={docURL} target="_blank">Documentation URL</a>}
-        {type === "Course" && <a href={course} target="_blank">Course URL</a>}
+        {type !== "Course" && <a href={docURL} target="_blank" rel="noreferrer">Documentation URL</a>}
+        {type === "Course" && <a href={course} target="_blank" rel="noreferrer">Course URL</a>}
         </div>}
         {status === "Pending" && <SubmitTask submitTask={this.submitTask} {...this.props}/>}
     </div>
