@@ -9,7 +9,7 @@ class UserProfile extends Component {
       <div className='container-fluid d-flex h-100 flex-column text-white mt-5'>
         <div className='row'>
          {loggedInUser && <div className='col-sm d-flex flex-column justify-content-evenly align-items-center'>
-              <img className='big-user-img' alt={loggedInUser.username} src={loggedInUser.imageUrl}/>
+              <img className='big-user-img mb-5' alt={loggedInUser.username} src={loggedInUser.imageUrl}/>
               <h5>{loggedInUser.username}</h5>
               <p>{loggedInUser.email}</p>
               <p>{loggedInUser.role}</p>  

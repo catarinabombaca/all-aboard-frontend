@@ -4,7 +4,7 @@ import UserService from '../user-service';
  
 class EditProfile extends Component {
 
-    state = {username: this.props.user.username, imageUrl: ''}
+    state = {username: this.props.user.username, imageUrl: '', loading: false}
     uploadService = new UploadService();
     userService = new UserService();
 
@@ -14,13 +14,14 @@ class EditProfile extends Component {
       };
 
     handleFileUpload = (event) => {
+        this.setState({loading: true});
         const uploadData = new FormData();
         uploadData.append('imageUrl', event.target.files[0]);
          
         this.uploadService.handleUpload(uploadData)
         .then(response => {
             console.log('responseUpload',response)
-            this.setState({imageUrl: response.secure_url})
+            this.setState({imageUrl: response.secure_url, loading: false})
         })
         .catch(err => console.log(err))
       }
@@ -51,8 +52,13 @@ class EditProfile extends Component {
                 <label className="form-label">Profile Photo</label>
                 <input className="form-control" type="file" name="imageUrl" onChange={ e => this.handleFileUpload(e)}/>
               </div>
-          
-              <input className='btn-red btn btn-primary btn-lg rounded-pill align-self-lg-start mx-5 my-3 px-5' type="submit" value="Save"/>
+
+              <button type="submit" class={`btn-red btn btn-primary btn-lg rounded-pill align-self-lg-start mx-5 my-3 px-5 ${this.state.loading ? "disabled" : ""}`}>
+                {this.state.loading ? (<div>
+                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;Loading...</div>
+                ) : (
+                  <span>Save</span>)}
+              </button>
             </form>
             </div>
     )
