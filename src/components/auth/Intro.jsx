@@ -6,7 +6,7 @@ class Intro extends Component {
  
   render(){
     return (
-      <div className='container-fluid d-flex h-100 flex-column'>
+      <div className='container-fluid d-flex flex-column'>
         <div className='row flex-grow-1'>
           <div className='col-sm d-flex flex-column justify-content-start align-items-center'>
             <h2 className='Big-top-margin text-white text-lg-start fs-1 fw-bold mx-5'>Employee onboarding has never been easier.</h2>
