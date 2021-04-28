@@ -58,9 +58,10 @@ class NavBar extends Component {
           <ul className="navbar-nav ml-auto mb-2 mb-lg-0">
             <li className='nav-item'><Link to='/'><button className='btn-link btn-lg m-2 px-4' onClick={() => this.logoutUser()}>Log out</button></Link></li>
             <li className='nav-item navbar-text text-white'>
-              <Link className='nav-link' to='/user-profile'>
-                {this.state.loggedInUser.username}
-                <img className="nav-user-img rounded-circle ms-3" alt={this.state.loggedInUser.username} src={this.state.loggedInUser.imageUrl}/>
+              <Link className='nav-link d-flex justify-content-center align-items-center' to='/user-profile'>
+                <span>{this.state.loggedInUser.username}</span>
+                <div className='nav-user-img rounded-circle ms-3 mt-1 justify-content-center align-items-center' 
+              style={{backgroundImage: `url('${this.state.loggedInUser.imageUrl}')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover'}}></div>
               </Link>
             </li>
           </ul>

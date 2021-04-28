@@ -53,9 +53,9 @@ class EditProfile extends Component {
                 <input className="form-control" type="file" name="imageUrl" onChange={ e => this.handleFileUpload(e)}/>
               </div>
 
-              <button type="submit" class={`btn-red btn btn-primary btn-lg rounded-pill align-self-lg-start mx-5 my-3 px-5 ${this.state.loading ? "disabled" : ""}`}>
+              <button type="submit" className={`btn-red btn btn-primary btn-lg rounded-pill align-self-lg-start mx-5 my-3 px-5 ${this.state.loading ? "disabled" : ""}`}>
                 {this.state.loading ? (<div>
-                    <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;Loading...</div>
+                    <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>&nbsp;Loading...</div>
                 ) : (
                   <span>Save</span>)}
               </button>

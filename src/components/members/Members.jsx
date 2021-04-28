@@ -17,7 +17,10 @@ class Members extends Component {
 
     getMembers = () => {
       this.userService.getUsers()
-      .then((users) => this.setState({allMembers: users, filteredMembers: users}))
+      .then((users) => {
+        const usersExceptLogUser = users.filter(user => user._id !== this.props.loggedInUser._id)
+        this.setState({allMembers: usersExceptLogUser, filteredMembers: usersExceptLogUser})
+      })
       .catch(err => console.log(err))
     }
 
@@ -38,7 +41,7 @@ class Members extends Component {
 
     searchQuery = (searchString) => {
       const pattern = new RegExp(searchString, 'i');
-      const filteredMembers = this.state.allMembers.filter(member => pattern.test(member.username));
+      const filteredMembers = this.state.allMembers.filter(member => pattern.test(member.username) && member._id !== this.props.loggedInUser._id);
       if(searchString === '') {
         this.setState({filteredMembers: [...this.state.allMembers]})
       } else {

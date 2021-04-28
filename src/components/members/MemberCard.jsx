@@ -13,7 +13,7 @@ render() {
                 <span className='fw-bolder'>{username}</span><br/>
                 <span>{role}</span>
             </div>
-            {(!teamLeader && (_id !== this.props.loggedInUser._id)) && <button className='m-2 btn btn-danger btn-sm align-self-end' onClick={() => this.props.addMemberToTeam(_id)}>Add to Team</button>}
+            {(!teamLeader && (_id !== this.props.loggedInUser._id)) && role !=="Team Leader" && <button className='m-2 btn btn-danger btn-sm align-self-end' onClick={() => this.props.addMemberToTeam(_id)}>Add to Team</button>}
         </li>
     )
 }

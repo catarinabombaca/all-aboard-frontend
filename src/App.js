@@ -55,7 +55,9 @@ class App extends Component {
           <ProtectedRoute exact path="/user-profile" component={UserProfile} loggedInUser={this.state.loggedInUser} setTheUser={this.setTheUser}/>
           <Route exact path="/signup" render={(props) => <Signup setUser={this.setTheUser} {...props}/>}/>
           <Route exact path='/login' render={(props) => <Login setUser={this.setTheUser} {...props}/>}/>
-          <Route exact path='/' component={Intro}/>
+          {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Leader' && <ProtectedRoute exact path='/' component={HomeLeader} loggedInUser={this.state.loggedInUser}/>}
+          {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Member' && <ProtectedRoute exact path='/' component={HomeMember} loggedInUser={this.state.loggedInUser}/>}
+          {!this.state.loggedInUser && <Route exact path='/' component={Intro}/>}
         </Switch>
       </div>
     </div>

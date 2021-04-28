@@ -126,7 +126,7 @@ class MemberDetails extends Component {
       <div className='col-sm rounded-3 bg-blue mx-5 my-1'>
         {this.state.member && <div>
         <UserHeader member={this.state.member}/>
-        {!this.state.member.journeyProgress && <div>
+        {!this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <div>
           <img className='wait-img' alt='no-journey' src={noJourney}/>
           <p>No journey yet!</p>
           <form onSubmit={this.handleFormSubmit}>
@@ -138,7 +138,7 @@ class MemberDetails extends Component {
             </div>
         </form>
         </div>}
-        {this.state.member.journeyProgress && <div>Journey progress</div>}
+        {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <div>Journey progress</div>}
         </div>}
         {!this.state.member && <p>Loading...</p>}
       </div>
