@@ -20,15 +20,11 @@ class MyTasks extends Component {
         this.getUserJourneyDetails()
     }
 
-    componentDidUpdate(prevProps, prevState) {
-
-    }
-
   render() {
     return (
       <div className='container-fluid'>
         <div className='row'>
-        {this.state.journeyDetails.length !==0 && <JourneyList data={this.state.journeyDetails}/>}
+        {this.state.journeyDetails.length !==0 && <JourneyList data={this.state.journeyDetails} page='my-tasks'/>}
         {this.props.match.params.id && <TaskDetail {...this.props}/>}
         </div>
       </div>

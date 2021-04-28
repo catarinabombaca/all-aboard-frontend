@@ -28,7 +28,7 @@ class Signup extends Component {
               error: null
           });
           this.props.setUser(response)
-          this.props.history.push(this.getRolePath(response))
+          this.props.history.push('/')
         }
     })
     .catch( err => alert(err) )
@@ -37,18 +37,6 @@ class Signup extends Component {
   handleChange = (event) => {  
     const {name, value} = event.target;
     this.setState({[name]: value});
-  }
-
-  getRolePath = (user) => {
-    if(!user) {
-      return null;
-    } else if (user.role === 'Team Leader') {
-      return '/home-leader';
-    } else if (user.role === 'Team Member') {
-      return '/home-member';
-    } else {
-      return '/';
-    }
   }
  
   render(){

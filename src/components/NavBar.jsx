@@ -19,23 +19,11 @@ class NavBar extends Component {
     })
   }
 
-  getRolePath = (user) => {
-    if(!user) {
-      return '/';
-    } else if (user.role === 'Team Leader') {
-      return '/home-leader';
-    } else if (user.role === 'Team Member') {
-      return '/home-member';
-    } else {
-      return '/';
-    }
-  }
-
   render() {
     return (
       <nav className="Main-nav navbar navbar-expand-lg navbar-dark">
         <div className="container-fluid">
-        <Link className="navbar-brand mb-0 fs-2 fw-bold" to={this.getRolePath(this.state.loggedInUser)}>all aboard.</Link>
+        <Link className="navbar-brand mb-0 fs-2 fw-bold" to='/'>all aboard.</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

@@ -8,7 +8,7 @@ class SubmitTask extends Component {
   handleFormSubmit = (event) => {
     event.preventDefault();
 
-    this.props.submitTask({
+    this.props.editTask({
         end: Date.now(),
         submitURL: this.state.submitURL,
         status: 'Closed'
@@ -25,9 +25,9 @@ class SubmitTask extends Component {
       <div>
         <form onSubmit={this.handleFormSubmit}>
           <label>Insert here the link to the final deliverable</label>
-          <input type="text" name="submitURL" value={this.state.submitURL} onChange={e => this.handleChange(e)}/>
-        
-          <input type="submit" value="Submit" />
+          {this.props.status === 'Pending' && <input className='form-control' type="text" name="submitURL" value={this.state.submitURL} onChange={e => this.handleChange(e)}/>}
+          {this.props.status === 'Closed' && <input className='form-control' type="text" name="submitURL" disabled value={this.state.submitURL} onChange={e => this.handleChange(e)}/>} 
+          {this.props.status === 'Pending' && <input type="submit" value="Submit" />}
         </form>
       </div>
     )

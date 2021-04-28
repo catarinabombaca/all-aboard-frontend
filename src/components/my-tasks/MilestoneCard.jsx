@@ -28,12 +28,12 @@ export default class MilestoneCard extends Component {
                 Milestone - {name}
                 </button>
             </h2>
-            <div id={`collapse${_id}`} class="accordion-collapse collapse show" aria-labelledby={`heading${_id}`} data-bs-parent="#accordionExample">
+            <div id={`collapse${_id}`} className="accordion-collapse collapse show" aria-labelledby={`heading${_id}`} data-bs-parent="#accordionExample">
                 <div className="accordion-body">
                     {this.state.tasks.length === 0 && <p>No tasks yet!</p>}
                     <ul className='list-group list-group-flush w-100'>
                         {this.state.tasks.map(task => {
-                        return <li className='list-group-item' key={task._id}><Link to={`/my-tasks/${task._id}`}>{task.name}</Link></li>
+                        return <li className='list-group-item' key={task._id}><Link to={`/${this.props.page}/${task._id}`}>{task.name}</Link></li>
                         })}
                     </ul>
                 </div>

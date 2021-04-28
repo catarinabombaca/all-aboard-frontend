@@ -10,10 +10,12 @@ import TaskService from '../canvas/task-service';
 import MilestoneService from '../canvas/milestone-service';
 import TaskProgressService from './task-p-service';
 import noJourney from './no-journey.svg'
+import JourneyList from '../my-tasks/JourneyList';
+import TaskDetail from '../my-tasks/TaskDetail';
  
 class MemberDetails extends Component {
 
-    state = {member: {}, assignedJourneyId: '', journeys: []}
+    state = {member: {}, userJourneyDetails: [], assignedJourneyId: '', journeys: []}
     userService = new UserService();
     journeyService = new JourneyService();
     journeyProgressService = new JourneyProgressService();
@@ -24,6 +26,12 @@ class MemberDetails extends Component {
     milestoneService = new MilestoneService();
     taskProgressService = new TaskProgressService();
 
+    getUserJourneyDetailsProgress = (user) => {
+      this.journeyDetailsProgressService.getJourneyDetailsProgress(user.journeyProgress._id)
+      .then((journeyDetails) => {this.setState({userJourneyDetails: journeyDetails})})
+      .catch(err => console.log(err))
+    }
+
     getJourneys = () => {
       this.journeyService.journeys()
       .then(journeys => this.setState({journeys: journeys, assignedJourneyId: journeys[0]._id}))
@@ -33,7 +41,10 @@ class MemberDetails extends Component {
     getUser = () => {
       const {id} = this.props.match.params
       this.userService.getUser(id)
-      .then((user) => this.setState({member: user}))
+      .then((user) => {
+        this.getUserJourneyDetailsProgress(user);
+        this.setState({member: user})
+      })
       .catch(err => console.log(err))
     }
 
@@ -122,6 +133,7 @@ class MemberDetails extends Component {
     }
 
   render() {
+    console.log(this.state.userJourneyDetails)
     return (
       <div className='col-sm rounded-3 bg-blue mx-5 my-1'>
         {this.state.member && <div>
@@ -138,7 +150,8 @@ class MemberDetails extends Component {
             </div>
         </form>
         </div>}
-        {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <div>Journey progress</div>}
+        <JourneyList data={this.state.userJourneyDetails} page='users'/>
+        <TaskDetail {...this.props}/>
         </div>}
         {!this.state.member && <p>Loading...</p>}
       </div>

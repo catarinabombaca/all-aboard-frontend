@@ -48,10 +48,8 @@ class App extends Component {
           <ProtectedRoute exact path='/canvas' component={Canvas} loggedInUser={this.state.loggedInUser}/>
           <ProtectedRoute exact path='/users/:id' component={Members} loggedInUser={this.state.loggedInUser}/>
           <ProtectedRoute exact path='/users' component={Members} loggedInUser={this.state.loggedInUser}/>
-          <ProtectedRoute exact path='/home-leader' component={HomeLeader} loggedInUser={this.state.loggedInUser}/>
           <ProtectedRoute exact path='/my-tasks/:id' component={MyTasks} loggedInUser={this.state.loggedInUser}/>
           <ProtectedRoute exact path='/my-tasks' component={MyTasks} loggedInUser={this.state.loggedInUser}/>
-          <ProtectedRoute exact path='/home-member' component={HomeMember} loggedInUser={this.state.loggedInUser}/>
           <ProtectedRoute exact path="/user-profile" component={UserProfile} loggedInUser={this.state.loggedInUser} setTheUser={this.setTheUser}/>
           <Route exact path="/signup" render={(props) => <Signup setUser={this.setTheUser} {...props}/>}/>
           <Route exact path='/login' render={(props) => <Login setUser={this.setTheUser} {...props}/>}/>
