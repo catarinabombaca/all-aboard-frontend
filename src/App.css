@@ -190,3 +190,7 @@ fieldset[disabled] .btn-dark-blue.active {
   width: 200px;
   height: 200px;
 }
+
+.box-height {
+  min-height: 73vh;
+}

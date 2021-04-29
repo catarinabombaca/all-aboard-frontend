@@ -83,12 +83,13 @@ class EditJourneyMilestones extends Component {
 
   render() {
     return (
-        <div className='rounded-3 bg-blue'>
+        <div>
           <div className='d-flex flex-row justify-content-end'>
             <h4 className='mt-3 flex-grow-1 text-start ps-4'>Edit Journey Details</h4>
             <button className='mx-2 mt-3 btn btn-light btn-dark-blue' onClick={() => this.props.setViewMode()}>Cancel</button>
             <button className='mx-2 mt-3 btn btn-danger' onClick={() => this.saveMilestonesChanges()}>Save Changes</button>
           </div>
+          <hr></hr>
           <div className='container-fluid'>
           <div className='row h-100 align-items-start justify-content-evenly m-1 mt-3 pb-3'>
             <div className='col-sm mb-2'>

@@ -59,9 +59,9 @@ class JourneyDetails extends Component {
     const {name, expectedDuration} = this.state.journey
     const journeyDetails = this.state.journeyDetails
     return (
-    <div className="col-sm-8">
+    <div className="bg-blue col-md-8 d-flex flex-column align-items-stretch justify-content-start">
       {this.state.mode === 'view' && <div>
-        <div className='rounded-3 bg-blue'>
+        <div className='rounded-3'>
           <div className='d-flex flex-row justify-content-end'>
             <h4 className='mt-3 flex-grow-1 text-start ps-4'>{name}</h4>
             <button className='mx-2 mt-3 btn btn-dark-blue' onClick={() => this.setEditMode('Journey')}>Edit</button>
@@ -70,7 +70,9 @@ class JourneyDetails extends Component {
            <p className='text-start ps-4 fs-5 pb-3'><b>Expected duration:</b> {expectedDuration}h</p>
         </div>
 
-        <div className='rounded-3 bg-blue'>
+        <hr></hr>
+
+        <div className='rounded-3'>
           <div className='d-flex flex-row justify-content-end'>
            <h4 className='mt-3 flex-grow-1 text-start ps-4'>Milestones:</h4>
            <button className='mx-2 mt-3 btn btn-dark-blue' onClick={() => this.setEditMode('JourneyMilestones')}>Edit</button>
@@ -81,6 +83,7 @@ class JourneyDetails extends Component {
                           .map((detail) => <li className='text-start fs-5 list-unstyled' key={detail._id}>{detail.order} - {detail.milestone.name}</li>)}
           </ul>}
         </div>
+        <hr></hr>
       </div>}
 
     {this.state.mode === 'editJourney' && <EditJourneyDetail journeyDetails={journeyDetails} journey={this.state.journey} 

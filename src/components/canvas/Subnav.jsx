@@ -5,7 +5,7 @@ class SubNav extends Component {
   render() {
     const {tab} = this.props
     return (
-        <ul className="nav nav-pills m-3">
+        <ul className="nav nav-pills my-3">
             <li className="nav-item">
               <button className={tab === "Journeys" ? "nav-link active p-2": 'nav-link text-white'} onClick={()=>this.props.setTab('Journeys')}>Journeys</button>
             </li>
