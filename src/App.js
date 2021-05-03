@@ -46,6 +46,7 @@ class App extends Component {
           <ProtectedRoute exact path='/canvas/create' component={Canvas} loggedInUser={this.state.loggedInUser} create={true}/>  
           <ProtectedRoute exact path='/canvas/:id' component={Canvas} loggedInUser={this.state.loggedInUser}/>
           <ProtectedRoute exact path='/canvas' component={Canvas} loggedInUser={this.state.loggedInUser}/>
+          <ProtectedRoute exact path='/users/task/:id' component={Members} loggedInUser={this.state.loggedInUser}/>
           <ProtectedRoute exact path='/users/:id' component={Members} loggedInUser={this.state.loggedInUser}/>
           <ProtectedRoute exact path='/users' component={Members} loggedInUser={this.state.loggedInUser}/>
           <ProtectedRoute exact path='/my-tasks/:id' component={MyTasks} loggedInUser={this.state.loggedInUser}/>
@@ -53,8 +54,8 @@ class App extends Component {
           <ProtectedRoute exact path="/user-profile" component={UserProfile} loggedInUser={this.state.loggedInUser} setTheUser={this.setTheUser}/>
           <Route exact path="/signup" render={(props) => <Signup setUser={this.setTheUser} {...props}/>}/>
           <Route exact path='/login' render={(props) => <Login setUser={this.setTheUser} {...props}/>}/>
-          {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Leader' && <ProtectedRoute exact path='/' component={HomeLeader} loggedInUser={this.state.loggedInUser}/>}
-          {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Member' && <ProtectedRoute exact path='/' component={HomeMember} loggedInUser={this.state.loggedInUser}/>}
+          {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Leader' && <ProtectedRoute exact path='/' component={Canvas} loggedInUser={this.state.loggedInUser}/>}
+          {this.state.loggedInUser && this.state.loggedInUser.role === 'Team Member' && <ProtectedRoute exact path='/' component={MyTasks} loggedInUser={this.state.loggedInUser}/>}
           {!this.state.loggedInUser && <Route exact path='/' component={Intro}/>}
         </Switch>
       </div>

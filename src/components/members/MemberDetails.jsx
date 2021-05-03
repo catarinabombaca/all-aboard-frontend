@@ -27,6 +27,7 @@ class MemberDetails extends Component {
     taskProgressService = new TaskProgressService();
 
     getUserJourneyDetailsProgress = (user) => {
+      console.log('userjourneyprogress',user)
       this.journeyDetailsProgressService.getJourneyDetailsProgress(user.journeyProgress._id)
       .then((journeyDetails) => {this.setState({userJourneyDetails: journeyDetails})})
       .catch(err => console.log(err))
@@ -42,7 +43,8 @@ class MemberDetails extends Component {
       const {id} = this.props.match.params
       this.userService.getUser(id)
       .then((user) => {
-        this.getUserJourneyDetailsProgress(user);
+        console.log('user', user)
+        if(user.journeyProgress) {this.getUserJourneyDetailsProgress(user);}
         this.setState({member: user})
       })
       .catch(err => console.log(err))
@@ -133,7 +135,6 @@ class MemberDetails extends Component {
     }
 
   render() {
-    console.log(this.state.userJourneyDetails)
     return (
       <div className='col-sm rounded-3 bg-blue mx-5 my-1'>
         {this.state.member && <div>
@@ -150,8 +151,8 @@ class MemberDetails extends Component {
             </div>
         </form>
         </div>}
-        <JourneyList data={this.state.userJourneyDetails} page='users'/>
-        <TaskDetail {...this.props}/>
+        {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <JourneyList data={this.state.userJourneyDetails} page='users/task'/>}
+        {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <TaskDetail {...this.props} mode='leader'/>}
         </div>}
         {!this.state.member && <p>Loading...</p>}
       </div>
