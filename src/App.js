@@ -6,8 +6,6 @@ import Intro from './components/auth/Intro';
 import Signup from './components/auth/Signup';
 import Login from './components/auth/Login';
 import AuthService from './components/auth/auth-service';
-import HomeLeader from './components/home/HomeLeader';
-import HomeMember from './components/home/HomeMember';
 import Canvas from './components/canvas/Canvas';
 import Members from './components/members/Members';
 import MyTasks from './components/my-tasks/MyTasks';
