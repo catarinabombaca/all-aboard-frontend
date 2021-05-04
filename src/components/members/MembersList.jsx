@@ -14,13 +14,11 @@ class MembersList extends Component {
 
   render() {
     return (
-      <div className='col-sm mt-4'>
-         <ul className='list-group'>
+        <ul className='list-group'>
         {this.props.members.map(member => {
            return <Link className='text-decoration-none' to={`/users/${member._id}`} key={member._id}><MemberCard member={member} {...this.props}/></Link>
         })}
         </ul>
-      </div>
     )
   }
 }

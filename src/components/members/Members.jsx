@@ -68,27 +68,30 @@ class Members extends Component {
 
   render() {
     return (
-      <div className='container-fluid'>
-        <div className='row h-100 justify-content-between align-items-start bg-shape mx-3'>
-          <h3 className='text-white text-start mx-5 my-5'>Members</h3>
-          <div className='col-12 col-lg-4 d-flex flex-column justify-content-start align-items center text-white'>
-            <input className='w-100 rounded-3' type='text' name='search' onChange={this.handleChange}/>
+      <div className='d-flex flex-column px-md-4'>
+      <div className='bg-shape d-flex flex-column'>
+        <div className='d-flex flex-column flex-md-row justify-content-between align-items-stretch px-4 py-2 '>
+            <h5 className='text-white mt-2'>Members</h5>
+            <input className='rounded-3 flex-grow-1 mx-3' type='text' name='search' onChange={this.handleChange}/>
             <div>
               <input type='checkbox' name='myTeam' onChange={this.handleChange}/>
-              <label className='p-2' htmlFor='myTeam'>Only show my team members</label>
+              <label className='p-2 text-white fs-6' htmlFor='myTeam'>Only show my team members</label>
             </div>
+        </div>
+        <div className='bg-white d-flex box-height container-fluid p-0'>
+          <div className='row m-0 flex-grow-1'>
+          <div className="col-md-4 p-0">
             <MembersList members={this.state.filteredMembers} addMemberToTeam={this.addMemberToTeam} {...this.props}/>
          </div>
-          {!this.props.match.params.id && <div className="col-12 col-lg-8 d-flex flex-column align-items-center justify-content-evenly">
-                    <div className='rounded-3 bg-blue w-100'>
-                        <img className='wait-img my-5 ms-5' alt='noUser' src={noUser}/>
-                        <p className='w-100 mb-3'>No item selected!</p>
-                    </div>
-                </div>}
-          
+            {!this.props.match.params.id && <div className="bg-blue col-md-8 d-flex flex-column align-items-center justify-content-start">
+                <img className='wait-img my-5 ms-5' alt='noUser' src={noUser}/>
+                <p className='ps-5'>No item selected!</p>
+            </div>}
           {this.props.match.params.id && <MemberDetails getMembers={this.getMembers} {...this.props}/>}
+          </div>
         </div>
       </div>
+    </div>
     )
   }
 }

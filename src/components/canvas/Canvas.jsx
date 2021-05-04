@@ -90,12 +90,8 @@ class Canvas extends Component {
     return (
       <div className='d-flex flex-column px-md-4'>
       <SubNav setTab={this.setTab} tab={this.state.tab}/>
-      {this.props.create && this.state.tab === 'Journeys' && <CreateJourney {...this.props} getJourneys={this.getJourneys}/>}
-      {this.props.create && this.state.tab === 'Milestones' && <CreateMilestone {...this.props} getMilestones={this.getMilestones}/>}
-      {this.props.create && this.state.tab === 'Tasks' && <CreateTask {...this.props} getTasks={this.getTasks}/>}
 
-
-      {!this.props.create && <div className='bg-shape d-flex flex-column'>
+      <div className='bg-shape d-flex flex-column'>
           <div className='d-flex px-4 py-1 justify-content-between align-items-center'>
             <h5 className='text-white'>{this.state.tab}</h5>
             <button className='btn btn-outline-light btn-sm rounded-pill my-2 px-3' onClick={() => {this.props.history.push('/canvas/create')}}>Create {this.state.tab}</button>
@@ -105,16 +101,20 @@ class Canvas extends Component {
                 <div className="col-md-4 p-0">
                   <List data={this.state.data} {...this.props}/>
                 </div>
-                {!this.props.match.params.id && <div className="bg-blue col-md-8 d-flex flex-column align-items-center justify-content-start">
+                {this.props.create && this.state.tab === 'Journeys' && <CreateJourney {...this.props} getJourneys={this.getJourneys}/>}
+                {this.props.create && this.state.tab === 'Milestones' && <CreateMilestone {...this.props} getMilestones={this.getMilestones}/>}
+                {this.props.create && this.state.tab === 'Tasks' && <CreateTask {...this.props} getTasks={this.getTasks}/>}
+
+                {!this.props.match.params.id && !this.props.create && <div className="bg-blue col-md-8 d-flex flex-column align-items-center justify-content-start">
                         <img className='wait-img my-5 ms-5' alt='waiting' src={waiting}/>
                         <p>No item selected!</p>
                 </div>}
-                {this.props.match.params.id && this.state.tab === 'Tasks' && <TaskDetails getTasks={this.getTasks} {...this.props}/>}
-                {this.props.match.params.id && this.state.tab === 'Milestones' && <MilestoneDetails getMilestones={this.getMilestones} {...this.props}/>}
-                {this.props.match.params.id && this.state.tab === 'Journeys' && <JourneyDetails getJourneys={this.getJourneys} {...this.props}/>}
+                {this.props.match.params.id && this.state.tab === 'Tasks' && !this.props.create && <TaskDetails getTasks={this.getTasks} {...this.props}/>}
+                {this.props.match.params.id && this.state.tab === 'Milestones' && !this.props.create && <MilestoneDetails getMilestones={this.getMilestones} {...this.props}/>}
+                {this.props.match.params.id && this.state.tab === 'Journeys' && !this.props.create && <JourneyDetails getJourneys={this.getJourneys} {...this.props}/>}
               </div>
             </div>
-      </div>}
+      </div>
       </div>
     )
   }

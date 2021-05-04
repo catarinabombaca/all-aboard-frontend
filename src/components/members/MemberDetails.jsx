@@ -136,9 +136,10 @@ class MemberDetails extends Component {
 
   render() {
     return (
-      <div className='col-sm rounded-3 bg-blue mx-5 my-1'>
+      <div className='bg-blue col-md-8 d-flex flex-column align-items-stretch justify-content-start'>
         {this.state.member && <div>
         <UserHeader member={this.state.member}/>
+        <hr></hr>
         {!this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <div>
           <img className='wait-img' alt='no-journey' src={noJourney}/>
           <p>No journey yet!</p>
