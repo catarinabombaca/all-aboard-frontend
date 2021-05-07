@@ -11,7 +11,7 @@ import MilestoneService from '../canvas/milestone-service';
 import TaskProgressService from './task-p-service';
 import noJourney from './no-journey.svg'
 import JourneyList from '../my-tasks/JourneyList';
-import TaskDetail from '../my-tasks/TaskDetail';
+
  
 class MemberDetails extends Component {
 
@@ -27,7 +27,6 @@ class MemberDetails extends Component {
     taskProgressService = new TaskProgressService();
 
     getUserJourneyDetailsProgress = (user) => {
-      console.log('userjourneyprogress',user)
       this.journeyDetailsProgressService.getJourneyDetailsProgress(user.journeyProgress._id)
       .then((journeyDetails) => {this.setState({userJourneyDetails: journeyDetails})})
       .catch(err => console.log(err))
@@ -137,7 +136,7 @@ class MemberDetails extends Component {
   render() {
     return (
       <div className='bg-blue col-md-8 d-flex flex-column align-items-stretch justify-content-start'>
-        {this.state.member && <div>
+        {this.state.member && <div className='p-3 container-fluid'>
         <UserHeader member={this.state.member}/>
         <hr></hr>
         {!this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <div>
@@ -152,8 +151,9 @@ class MemberDetails extends Component {
             </div>
         </form>
         </div>}
-        {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <JourneyList data={this.state.userJourneyDetails} page='users/task'/>}
-        {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <TaskDetail {...this.props} mode='leader'/>}
+        {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <h4 className='text-start'>Tasks</h4>}
+        {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <JourneyList data={this.state.userJourneyDetails} page='users/task' {...this.props}/>}
+        {/* {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <TaskDetail {...this.props} mode='leader'/>} */}
         </div>}
         {!this.state.member && <p>Loading...</p>}
       </div>

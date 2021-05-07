@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 import MilestoneProgressService from '../members/milestone-p-service';
+import TaskDetail from './TaskDetail';
 
 export default class MilestoneCard extends Component {
 
-    state = {tasks: [], showTasks: false}
+    state = {tasks: [], selectedTask: null, showTasks: false}
     milestoneProgressService = new MilestoneProgressService();
 
 
@@ -31,11 +32,10 @@ export default class MilestoneCard extends Component {
             <div id={`collapse${_id}`} className="accordion-collapse collapse show" aria-labelledby={`heading${_id}`} data-bs-parent="#accordionExample">
                 <div className="accordion-body">
                     {this.state.tasks.length === 0 && <p>No tasks yet!</p>}
-                    <ul className='list-group list-group-flush w-100'>
                         {this.state.tasks.map(task => {
-                        return <li className='list-group-item' key={task._id}><Link to={`/${this.props.page}/${task._id}`}>{task.name}</Link></li>
+                        return <button className='badge bg-primary rounded-pill mx-1 px-3' onClick={() => this.setState({selectedTask: task})}>{task.name}</button>
                         })}
-                    </ul>
+                    {this.state.selectedTask && <TaskDetail {...this.props} task={this.state.task} mode='leader'/>}
                 </div>
             </div>
         </div>

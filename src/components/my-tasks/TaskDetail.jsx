@@ -25,23 +25,28 @@ class TaskDetail extends Component {
   }
 
   componentDidMount() {
-    this.getTaskProgress();
+    if(this.props.mode === 'leader') {
+      this.setState({task: this.props.task})
+    } else {
+      this.getTaskProgress();
+    }
   }
 
   componentDidUpdate(prevProps) {
-    if(prevProps.match.params.id !== this.props.match.params.id) {
+    if(prevProps.match.params.id !== this.props.match.params.id && this.props.mode !== 'leader') {
         this.getTaskProgress();
+        } else if (prevProps.task._id !== this.props.task._id) {
+          this.setState({task: this.props.task})
         }
     }
  
   render() {
-    console.log(this.state.task)
     if(this.state.task) {
   
       const {name, description, type, expectedDuration, docURL, course, status} = this.state.task
       return (
-      <div className='col-12 col-lg-8 d-flex flex-column'>
-          <div className='rounded-3 bg-blue my-4 my-lg-0'>
+      <div className='col-12 d-flex flex-column'>
+          <div className=''>
           {!status && this.props.mode !== 'leader' && <div className='d-flex flex-row justify-content-end'>
               <button className='mx-2 mt-3 btn btn-danger' onClick={() => this.editTask({start: Date.now(), status: 'Pending'})}>Start Task</button>
           </div>}
@@ -59,10 +64,8 @@ class TaskDetail extends Component {
     } else {
 
       return (
-        <div className='col-12 col-lg-8 d-flex flex-column'>
-            <div className='rounded-3 bg-blue my-4 my-lg-0'>
-              No task selected
-            </div>
+        <div className='col-12 d-flex flex-column my-5'>
+              No task selected!
         </div>
       )
     }
