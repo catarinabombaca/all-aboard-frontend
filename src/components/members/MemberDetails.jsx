@@ -153,7 +153,6 @@ class MemberDetails extends Component {
         </div>}
         {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <h4 className='text-start'>Tasks</h4>}
         {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <JourneyList data={this.state.userJourneyDetails} page='users/task' {...this.props}/>}
-        {/* {this.state.member.journeyProgress && this.state.member.role !=='Team Leader' && <TaskDetail {...this.props} mode='leader'/>} */}
         </div>}
         {!this.state.member && <p>Loading...</p>}
       </div>

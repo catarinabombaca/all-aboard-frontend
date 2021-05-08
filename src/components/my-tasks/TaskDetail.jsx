@@ -7,35 +7,24 @@ class TaskDetail extends Component {
   state = {task: {}};
   taskProgressService = new TaskProgressService()
 
-  editTask = (data) => {
-      const id = this.props.match.params.id
+  editTask = (id, data) => {
       this.taskProgressService.editTaskProgress(id, data)
-      .then(() => this.getTaskProgress())
+      .then(() => this.props.getMilestoneTasksProgress())
       .catch(err => console.log(err))
   }
   
-  getTaskProgress = () => {
-      const id = this.props.match.params.id
-      this.taskProgressService.getTaskProgress(id)
-      .then(task =>{
-        console.log('task', task)
-        this.setState({task: task})
-      })
-      .catch(err => console.log(err))
-  }
+  // getTaskProgress = (id) => {
+  //     this.taskProgressService.getTaskProgress(id)
+  //     .then(task =>{this.setState({task: task})})
+  //     .catch(err => console.log(err))
+  // }
 
   componentDidMount() {
-    if(this.props.mode === 'leader') {
       this.setState({task: this.props.task})
-    } else {
-      this.getTaskProgress();
-    }
   }
 
   componentDidUpdate(prevProps) {
-    if(prevProps.match.params.id !== this.props.match.params.id && this.props.mode !== 'leader') {
-        this.getTaskProgress();
-        } else if (prevProps.task._id !== this.props.task._id) {
+      if (prevProps.task._id !== this.props.task._id) {
           this.setState({task: this.props.task})
         }
     }
@@ -43,21 +32,23 @@ class TaskDetail extends Component {
   render() {
     if(this.state.task) {
   
-      const {name, description, type, expectedDuration, docURL, course, status} = this.state.task
+      const {name, description, type, expectedDuration, docURL, course, status, _id, submitURL} = this.state.task
+      let color = '';
+      status === 'Closed' ? color='bg-success' : status === 'Pending' ? color='bg-warning' : color='bg-secondary'
       return (
-      <div className='col-12 d-flex flex-column'>
-          <div className=''>
-          {!status && this.props.mode !== 'leader' && <div className='d-flex flex-row justify-content-end'>
-              <button className='mx-2 mt-3 btn btn-danger' onClick={() => this.editTask({start: Date.now(), status: 'Pending'})}>Start Task</button>
-          </div>}
-          <h4 className='my-4'>{name}</h4>
-          <p><b>Type:</b> {type}</p>
-          <p><b>Description:</b> {description}</p>
-          <p><b>Expected duration:</b> {expectedDuration}h</p>
-          {type !== "Course" && <a href={docURL} target="_blank" rel="noreferrer">Documentation URL</a>}
-          {type === "Course" && <a href={course} target="_blank" rel="noreferrer">Course URL</a>}
-          {this.props.mode === 'leader' && <p><b>{status}</b></p>}
-          {status && this.props.mode !== 'leader' && <SubmitTask editTask={this.editTask} status={status} {...this.props}/>}
+      <div className='col-12 col-lg-8 c d-flex flex-column'>
+          <div className='text-start'>
+          <h5 className='m-0'>
+            {name} 
+            <span className={`ms-2 badge ${color}`}>{status ? status : 'Not Started'}</span>
+            {!status && this.props.mode !== 'Team Leader' && <button className='badge btn btn-danger ms-2' onClick={() => this.editTask(_id, {start: Date.now(), status: 'Pending'})}>Start</button>}
+            </h5>
+          <span className='fs-6'>{type}</span>
+          <p className='fs-6'><b>Expected duration:</b> {expectedDuration}h</p>
+          <p className='fs-6'><b>Description:</b> {description}</p>
+          {type !== "Course" && <a className='fs-6 bi bi-link-45deg' href={docURL} target="_blank" rel="noreferrer">documentation URL</a>}
+          {type === "Course" && <a className='fs-6 bi bi-link-45deg' href={course} target="_blank" rel="noreferrer">course URL</a>}
+          {status && this.props.mode !== 'Team Leader' && <SubmitTask editTask={this.editTask} id={_id} submitURL={submitURL} status={status} {...this.props}/>}
           </div>
       </div>
       )

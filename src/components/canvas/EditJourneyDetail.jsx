@@ -27,7 +27,6 @@ class EditJourneyDetail extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps.match.params.id !== this.props.match.params.id)
     if(prevProps.match.params.id !== this.props.match.params.id) {
       this.props.getListItem();
       this.props.setViewMode();

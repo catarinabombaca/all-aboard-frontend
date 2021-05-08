@@ -29,8 +29,7 @@ class MyTasks extends Component {
           <p>Ups...! Seems like you do not have tasks yet!</p>
           <img alt='no tasks' src={noTasks}/>
           </div>}
-        {this.state.journeyDetails.length !==0 && <JourneyList data={this.state.journeyDetails} page='my-tasks'/>}
-        {this.props.match.params.id && <TaskDetail {...this.props}/>}
+        {this.state.journeyDetails.length !==0 && <JourneyList data={this.state.journeyDetails} page='my-tasks' {...this.props}/>}
         </div>
       </div>
     )

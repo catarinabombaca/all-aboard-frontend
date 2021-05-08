@@ -65,14 +65,18 @@ class EditMilestoneTasks extends Component {
 
   render() {
     return (
-        <div className='rounded-3 bg-blue'>
+        <div>
           <div className='d-flex flex-row justify-content-end'>
-            <h4 className='mt-3 flex-grow-1 text-start ps-4'>Edit Tasks</h4>
+            <h4 className='mt-3 flex-grow-1 text-start ps-1'>Edit Tasks</h4>
             <button className='mx-2 mt-3 btn btn-light btn-dark-blue' onClick={() => this.props.setViewMode()}>Cancel</button>
             <button className='mx-2 mt-3 btn btn-danger' onClick={() => this.saveTasksChanges()}>Save Changes</button>
           </div>
-          <div className='container-fluid'>
-          <div className='row h-100 align-items-start justify-content-evenly m-1 mt-3 pb-3'>
+
+          <hr></hr>
+
+          <div className='container-fluid px-0'>
+            <div className='mb-2'>
+              <h5 className='mt-3 flex-grow-1 text-start px-1'>Tasks</h5>
             <div className='col-sm mb-2'>
             {this.state.listTasks.length === 0 && <p className='p-4'>Added tasks will show up here.</p>}
             <ul className="list-group">
@@ -82,7 +86,10 @@ class EditMilestoneTasks extends Component {
             </ul>
             </div>
 
-            <div className='col-sm mb-2'>
+            <hr></hr>
+
+            <div className='mb-2'>
+              <h5 className='mt-3 flex-grow-1 text-start px-1'>Search</h5>
               <input className='w-100 mb-3 rounded-3 ps-2' type='text' name='search' onChange={this.handleChange}/>
               {this.state.filteredTasks.length === 0 && <p>No results found!</p>}
               <ul className="list-group">

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom';
 import MilestoneProgressService from '../members/milestone-p-service';
 import TaskDetail from './TaskDetail';
 
@@ -33,9 +32,13 @@ export default class MilestoneCard extends Component {
                 <div className="accordion-body">
                     {this.state.tasks.length === 0 && <p>No tasks yet!</p>}
                         {this.state.tasks.map(task => {
-                        return <button className='badge bg-primary rounded-pill mx-1 px-3' onClick={() => this.setState({selectedTask: task})}>{task.name}</button>
+                            let color = '';
+                            task.status === 'Closed' ? color='bg-success' : task.status === 'Pending' ? color='bg-warning' : color='bg-secondary'
+                        return <button className={`badge bg-primary rounded-pill mx-1 px-3 border-0 ${color}`}
+                        onClick={() => this.setState({selectedTask: task})}>{task.name}</button>
                         })}
-                    {this.state.selectedTask && <TaskDetail {...this.props} task={this.state.task} mode='leader'/>}
+                    {this.state.selectedTask && <hr></hr>}
+                    {this.state.selectedTask && <TaskDetail task={this.state.selectedTask}  getMilestoneTasksProgress={this.getMilestoneTasksProgress} mode={this.props.loggedInUser.role} {...this.props} />}
                 </div>
             </div>
         </div>

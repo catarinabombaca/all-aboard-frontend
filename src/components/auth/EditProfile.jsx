@@ -20,7 +20,6 @@ class EditProfile extends Component {
          
         this.uploadService.handleUpload(uploadData)
         .then(response => {
-            console.log('responseUpload',response)
             this.setState({imageUrl: response.secure_url, loading: false})
         })
         .catch(err => console.log(err))
@@ -30,8 +29,6 @@ class EditProfile extends Component {
         e.preventDefault();
         this.userService.editUser(this.props.user._id, this.state)
         .then(response => {
-            console.log('handlesubmit', response)
-            console.log('thisprops',this.props)
             this.props.setTheUser(response)
         })
         .catch(err => console.log(err))
@@ -39,7 +36,6 @@ class EditProfile extends Component {
       };
 
   render() {
-      console.log('state',this.state)
     return (
       <div className='col-sm d-flex flex-column justify-content-evenly align-items-center'>
       <form className='w-75 m-5' onSubmit={this.handleSubmit}>

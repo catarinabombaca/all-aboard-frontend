@@ -33,7 +33,6 @@ class Login extends Component {
   }
  
   render() {
-    console.log('state', this.state)
     return(
         <div className='container-fluid d-flex h-100 flex-column align-items-center text-white'>
         {this.state.redirect && <Redirect to={this.state.redirect}/>}
