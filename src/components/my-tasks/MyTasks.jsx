@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import JourneyList from './JourneyList';
 import JourneyDetailProgressService from '../members/journey-p-details-service';
-import TaskDetail from './TaskDetail';
 import noTasks from './no-tasks.svg';
 
 class MyTasks extends Component {

@@ -27,6 +27,3 @@ render() {
 }
  
 export default UserHeader;
-
- {/* {teamLeader && <p><b>Team Leader:</b> {teamLeader.username}</p>}
-                    <p><b>Joined in:</b> {date.toDateString()}</p> */}
